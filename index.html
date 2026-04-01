@@ -1039,25 +1039,14 @@ footer {
         <span class="audio-song-title">We Are Who We Are Because of You</span>
         <span class="audio-song-sub">Legacy Song · Country / Americana · Sample</span>
       </div>
-      <div class="audio-controls">
-        <button class="play-btn" id="playBtn" onclick="togglePlay()">
-          <svg id="playIcon" width="14" height="16" viewBox="0 0 14 16" fill="none">
-            <path d="M2 1l11 7-11 7V1z" fill="white"/>
+      <div style="margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <a href="https://suno.com/song/055ed064-f2cb-4842-b86f-03646c6edd4e" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:12px; background:var(--amber); color:var(--ink); font-family:'Jost',sans-serif; font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; padding:14px 32px; border-radius:2px; text-decoration:none; transition:background .2s;">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+            <path d="M2 1l11 7-11 7V1z" fill="currentColor"/>
           </svg>
-          <svg id="pauseIcon" width="12" height="16" viewBox="0 0 12 16" fill="none" style="display:none">
-            <rect x="0" y="0" width="4" height="16" rx="1" fill="white"/>
-            <rect x="8" y="0" width="4" height="16" rx="1" fill="white"/>
-          </svg>
-        </button>
-        <div class="progress-wrap">
-          <div class="progress-bar" id="progressBar" onclick="seekAudio(event)">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-          <div class="time-row">
-            <span id="currentTime">0:00</span>
-            <span id="duration">—</span>
-          </div>
-        </div>
+          Listen to the Sample Song
+        </a>
+        <span style="font-size:10px; color:rgba(250,250,247,.3); letter-spacing:.1em; font-family:'Cormorant Garamond',serif; font-style:italic;">Opens on Suno · free to play</span>
       </div>
     </div>
     <p class="audio-note">Sample song for demonstration purposes. Your family's song will be completely original.</p>
