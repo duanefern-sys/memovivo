@@ -432,9 +432,18 @@ function formatTime(s) {
 
 function submitWaitlist() {
   const email = document.getElementById('waitlistEmail').value.trim();
-  if (!email || !email.includes('@')) { document.getElementById('waitlistEmail').style.borderColor = 'var(--amber)'; return; }
-  document.getElementById('waitlistForm').style.display = 'none';
-  document.getElementById('waitlistSuccess').style.display = 'block';
+  if (!email || !email.includes('@')) {
+    document.getElementById('waitlistEmail').style.borderColor = 'var(--amber)';
+    return;
+  }
+  fetch('https://formspree.io/f/xqegljgy', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, form: 'waitlist' })
+  }).then(() => {
+    document.getElementById('waitlistForm').style.display = 'none';
+    document.getElementById('waitlistSuccess').style.display = 'block';
+  });
 }
 
 function submitContact() {
@@ -444,11 +453,14 @@ function submitContact() {
   if (!name || !email || !email.includes('@')) return;
   const type = document.getElementById('contactType').value;
   const message = document.getElementById('contactMessage').value.trim();
-  const subject = encodeURIComponent(`MemoVivo Partner Inquiry — ${org || name}`);
-  const body = encodeURIComponent(`Name: ${name}\nOrganization: ${org}\nType: ${type}\n\n${message}`);
-  window.location.href = `mailto:duane@memovivo.co?subject=${subject}&body=${body}`;
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('contactSuccess').style.display = 'block';
+  fetch('https://formspree.io/f/xqegljgy', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, org, email, type, message, form: 'partner-inquiry' })
+  }).then(() => {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactSuccess').style.display = 'block';
+  });
 }
 </script>
 </body>
