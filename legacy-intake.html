@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legacy Song — MemoVivo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber:       #C9A84C;
+      --amber-deep:  #8B6914;
+      --parchment:   #F5EDD6;
+      --parchment-dark: #EDE0C0;
+      --brown:       #3B2A1A;
+      --brown-mid:   #6B4E2F;
+      --brown-light: #9A7A5A;
+      --cream:       #FDFAF3;
+      --rule:        #DDD0B0;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--brown);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── PARCHMENT TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(185,150,80,0.03) 2px,
+          rgba(185,150,80,0.03) 4px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .brand-mark {
+      display: inline-block;
+      width: 48px;
+      height: 2px;
+      background: var(--amber);
+      margin-bottom: 20px;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber-deep);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 6vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--amber-deep);
+    }
+
+    .page-intro {
+      font-size: 1rem;
+      color: var(--brown-mid);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .amber-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+      margin: 32px auto;
+      opacity: 0.6;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--parchment);
+      border: 1px solid var(--parchment-dark);
+      border-radius: 2px;
+      padding: 48px 44px;
+      box-shadow: 0 4px 32px rgba(59,42,26,0.07), 0 1px 4px rgba(59,42,26,0.05);
+    }
+
+    @media (max-width: 540px) {
+      .form-card { padding: 32px 22px; }
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber-deep);
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ── FIELD GROUP ── */
+    .field-group {
+      margin-bottom: 28px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 8px;
+    }
+
+    .field-hint {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--brown-mid);
+      font-style: italic;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 1px;
+      padding: 12px 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--brown);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.7;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A7A5A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    /* ── QUESTION BLOCKS ── */
+    .questions-section {
+      margin-top: 40px;
+    }
+
+    .question-block {
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .question-block:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .question-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+
+    .question-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .question-guide {
+      font-size: 0.85rem;
+      color: var(--brown-light);
+      font-style: italic;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    /* ── MUSIC SECTION ── */
+    .music-section {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .music-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .music-option {
+      position: relative;
+    }
+
+    .music-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .music-option label {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 1px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--brown-mid);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: var(--cream);
+      user-select: none;
+    }
+
+    .music-option input[type="checkbox"]:checked + label {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: var(--cream);
+    }
+
+    .music-option label:hover {
+      border-color: var(--amber);
+      color: var(--brown);
+    }
+
+    /* ── SUBMIT ── */
+    .submit-section {
+      margin-top: 44px;
+      text-align: center;
+    }
+
+    .submit-note {
+      font-size: 0.85rem;
+      color: var(--brown-light);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      background: var(--brown);
+      color: var(--parchment);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      padding: 16px 44px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+      border-radius: 1px;
+    }
+
+    .submit-btn:hover {
+      background: var(--amber-deep);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 0.8rem;
+      color: var(--brown-light);
+      line-height: 1.8;
+    }
+
+    .site-footer a {
+      color: var(--amber-deep);
+      text-decoration: none;
+    }
+
+    /* ── CONFIRMATION STATE ── */
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .confirmation.visible {
+      display: block;
+    }
+
+    .confirmation-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 24px;
+      border: 1px solid var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .confirmation-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--amber-deep);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .confirmation h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 16px;
+    }
+
+    .confirmation p {
+      color: var(--brown-mid);
+      font-size: 0.95rem;
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── REQUIRED INDICATOR ── */
+    .req { color: var(--amber); margin-left: 2px; }
+
+    /* ── TWO COL ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="brand-mark"></div>
+    <p class="brand-name">MemoVivo &nbsp;·&nbsp; Legacy Song</p>
+    <h1 class="page-title">A song born from<br><em>your memories.</em></h1>
+    <p class="page-intro">
+      There is no right or wrong way to answer these questions.
+      Write as much or as little as feels natural.
+      Your words — even a single sentence — are enough to begin.
+    </p>
+    <div class="amber-rule"></div>
+  </header>
+
+  <!-- FORM CARD -->
+  <div class="form-card" id="form-card">
+
+    <form id="intake-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+      <!-- Hidden spam trap -->
+      <input type="text" name="_gotcha" style="display:none">
+      <input type="hidden" name="_subject" value="MemoVivo: New Legacy Song Intake Submission">
+
+      <!-- ── ABOUT THEIR LOVED ONE ── -->
+      <p class="section-label">About Your Loved One</p>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" for="loved-one-name">Their Name <span class="req">*</span></label>
+          <input type="text" id="loved-one-name" name="Loved One Name" placeholder="Full name or nickname" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="funeral-home">Funeral Home <span class="req">*</span></label>
+          <input type="text" id="funeral-home" name="Funeral Home" placeholder="Name of funeral home" required>
+        </div>
+      </div>
+
+      <!-- ── ABOUT YOU ── -->
+      <p class="section-label" style="margin-top:32px;">About You</p>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" for="your-name">Your Name <span class="req">*</span></label>
+          <input type="text" id="your-name" name="Your Name" placeholder="Your full name" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="relationship">Your Relationship <span class="req">*</span></label>
+          <input type="text" id="relationship" name="Relationship" placeholder="e.g. daughter, husband, friend" required>
+        </div>
+      </div>
+
+      <!-- ── THE SEVEN QUESTIONS ── -->
+      <div class="questions-section">
+        <p class="section-label">Seven Questions</p>
+
+        <!-- Q1 -->
+        <div class="question-block">
+          <p class="question-number">Question One</p>
+          <p class="question-text">What did people call them?</p>
+          <p class="question-guide">Their full name, a nickname, what the grandkids called them — whatever felt most like them.</p>
+          <textarea name="Q1 What did people call them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-block">
+          <p class="question-number">Question Two</p>
+          <p class="question-text">What did they love doing most?</p>
+          <p class="question-guide">Their passion, their hobby, the thing they could do for hours without noticing the time.</p>
+          <textarea name="Q2 What did they love doing most" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-block">
+          <p class="question-number">Question Three</p>
+          <p class="question-text">Is there a place that felt most like them?</p>
+          <p class="question-guide">A room, a yard, a town, a chair by the window — wherever they seemed most at home in the world.</p>
+          <textarea name="Q3 A place that felt most like them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-block">
+          <p class="question-number">Question Four</p>
+          <p class="question-text">Was there a phrase everyone who loved them would recognize?</p>
+          <p class="question-guide">A saying, a word they always used, something they repeated so often it became part of who they were.</p>
+          <textarea name="Q4 A phrase everyone would recognize" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-block">
+          <p class="question-number">Question Five</p>
+          <p class="question-text">Show me a moment when they were completely happy.</p>
+          <p class="question-guide">Not a description — a moment. Where were they? Who was there? What were they doing?</p>
+          <textarea name="Q5 A moment when they were completely happy" rows="4" placeholder="Take your time with this one…"></textarea>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-block">
+          <p class="question-number">Question Six</p>
+          <p class="question-text">What small ordinary thing did they always do?</p>
+          <p class="question-guide">Something so routine nobody talked about it — but everybody knew. The coffee ritual, the way they said goodbye, the sound of them moving through the house.</p>
+          <textarea name="Q6 A small ordinary thing they always did" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-block">
+          <p class="question-number">Question Seven</p>
+          <p class="question-text">Because of them, what is different in your life?</p>
+          <p class="question-guide">Their lasting mark. What did they leave inside you that will still be there ten years from now?</p>
+          <textarea name="Q7 Because of them what is different in your life" rows="4" placeholder="There is no wrong answer here…"></textarea>
+        </div>
+
+      </div><!-- /questions-section -->
+
+      <!-- ── MUSIC ── -->
+      <div class="music-section">
+        <p class="section-label">The Sound of the Song</p>
+        <p class="field-hint" style="margin-bottom:16px;">If you could choose, what would this song feel like? Select any that feel right — or write your own below.</p>
+
+        <div class="music-options">
+          <div class="music-option"><input type="checkbox" id="gospel" name="Music Style" value="Gospel / Hymn"><label for="gospel">Gospel / Hymn</label></div>
+          <div class="music-option"><input type="checkbox" id="country" name="Music Style" value="Country / Folk"><label for="country">Country / Folk</label></div>
+          <div class="music-option"><input type="checkbox" id="rb" name="Music Style" value="R&B / Soul"><label for="rb">R&amp;B / Soul</label></div>
+          <div class="music-option"><input type="checkbox" id="pop" name="Music Style" value="Pop"><label for="pop">Pop</label></div>
+          <div class="music-option"><input type="checkbox" id="jazz" name="Music Style" value="Jazz / Blues"><label for="jazz">Jazz / Blues</label></div>
+          <div class="music-option"><input type="checkbox" id="classical" name="Music Style" value="Classical / Orchestral"><label for="classical">Classical / Orchestral</label></div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="music-artist">A song or artist they loved</label>
+          <span class="field-hint">This helps us find the right sound more than any genre label can.</span>
+          <input type="text" id="music-artist" name="Artist or Song Reference" placeholder="e.g. "Amazing Grace" or Johnny Cash">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="song-feel">How should the song feel when it ends?</label>
+          <span class="field-hint">Peaceful? Celebratory? Bittersweet? There's no wrong answer.</span>
+          <input type="text" id="song-feel" name="How song should feel" placeholder="Describe the feeling…">
+        </div>
+      </div>
+
+      <!-- ── SUBMIT ── -->
+      <div class="submit-section">
+        <p class="submit-note">
+          Your responses go directly and securely to our songwriter.<br>
+          The song will be delivered within 24 hours of submission.
+        </p>
+        <button type="submit" class="submit-btn" id="submit-btn">Send My Memories</button>
+      </div>
+
+    </form>
+
+    <!-- CONFIRMATION -->
+    <div class="confirmation" id="confirmation">
+      <div class="confirmation-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>Thank you.</h2>
+      <p>
+        Your memories have been received. Our songwriter will begin
+        crafting <span id="confirm-name">their</span> song right away.
+        It will be delivered within 24 hours.
+      </p>
+    </div>
+
+  </div><!-- /form-card -->
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>MemoVivo &nbsp;·&nbsp; Every life deserves a song.</p>
+    <p style="margin-top:6px;"><a href="https://memovivo.co">memovivo.co</a></p>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+  const form = document.getElementById('intake-form');
+  const confirmation = document.getElementById('confirmation');
+  const submitBtn = document.getElementById('submit-btn');
+  const confirmName = document.getElementById('confirm-name');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Grab loved one's name for confirmation message
+    const lovedOneName = document.getElementById('loved-one-name').value.trim();
+    if (lovedOneName) {
+      confirmName.textContent = lovedOneName + "'s";
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const data = new FormData(form);
+
+    // Collect all checked music styles
+    const checkedStyles = [...document.querySelectorAll('input[name="Music Style"]:checked')]
+      .map(cb => cb.value).join(', ');
+    data.set('Music Style', checkedStyles || 'Not specified');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        confirmation.classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send My Memories';
+        alert('Something went wrong. Please try again or contact us at duane@memovivo.co.');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send My Memories';
+      alert('Something went wrong. Please try again or contact us at duane@memovivo.co.');
+    }
+  });
+</script>
+
+</body>
+</html>
