@@ -162,8 +162,8 @@ input[type="email"],
 select,
 textarea {
   width: 100%;
-  background: var(--cream);
-  border: 1px solid var(--rule);
+  background: #ffffff;
+  border: 2px solid var(--amber);
   border-radius: 1px;
   padding: 12px 14px;
   font-family: 'Jost', sans-serif;
@@ -179,8 +179,8 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  border-color: var(--amber-deep);
+  box-shadow: 0 0 0 4px rgba(139,134,20,0.18);
 }
 
 textarea {
@@ -267,15 +267,16 @@ select {
 .music-option label {
   display: inline-block;
   padding: 8px 16px;
-  border: 1px solid var(--rule);
-  border-radius: 1px;
+  border: 2px solid var(--amber);
+  border-radius: 4px;
   font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--brown-mid);
+  font-weight: 500;
+  color: var(--brown);
   cursor: pointer;
   transition: all 0.15s ease;
-  background: var(--cream);
+  background: #ffffff;
   user-select: none;
+  box-shadow: 0 1px 3px rgba(59,42,26,0.10);
 }
 
 .music-option input[type="checkbox"]:checked + label {
@@ -306,19 +307,24 @@ select {
   background: var(--brown);
   color: var(--parchment);
   font-family: 'Jost', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  border: none;
-  padding: 16px 44px;
+  border: 3px solid var(--brown);
+  padding: 18px 56px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-  border-radius: 1px;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(59,42,26,0.35);
+  min-width: 220px;
 }
 
 .submit-btn:hover {
   background: var(--amber-deep);
+  border-color: var(--amber-deep);
+  box-shadow: 0 6px 20px rgba(59,42,26,0.45);
+  transform: translateY(-1px);
 }
 
 .submit-btn:active {
