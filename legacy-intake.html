@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,12 +8,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-```
 :root {
   --amber:       #C9A84C;
   --amber-deep:  #8B6914;
   --parchment:   #F5EDD6;
-  --parchment-dark: #EDE0C0
+  --parchment-dark: #EDE0C0;
   --brown:       #3B2A1A;
   --brown-mid:   #6B4E2F;
   --brown-light: #9A7A5A;
@@ -407,17 +405,14 @@ select {
 @media (max-width: 480px) {
   .two-col { grid-template-columns: 1fr; }
 }
-```
 
   </style>
 </head>
 <body>
-
 <div class="page-wrap">
-
   <header class="site-header">
     <div class="brand-mark"></div>
-    <p class="brand-name">MemoVivo &nbsp;·&nbsp; Legacy Song</p>
+    <p class="brand-name">MemoVivo · Legacy Song</p>
     <h1 class="page-title">A song born from<br><em>your memories.</em></h1>
     <p class="page-intro">
       There is no right or wrong way to answer these questions.
@@ -429,159 +424,142 @@ select {
 
   <div class="form-card" id="form-card">
 
-```
-<form id="intake-form">
+    <form id="intake-form">
+      <input type="hidden" name="access_key" value="a4219cf2-dcb2-4d8b-b08e-66ef4f485b86">
+      <input type="hidden" name="subject" value="MemoVivo: New Legacy Song Intake Submission">
+      <input type="hidden" name="from_name" value="MemoVivo Legacy Intake">
+      <input type="checkbox" name="botcheck" style="display:none;">
 
-  <!-- Web3Forms access key -->
-  <input type="hidden" name="access_key" value="a4219cf2-dcb2-4d8b-b08e-66ef4f485b86">
-  <input type="hidden" name="subject" value="MemoVivo: New Legacy Song Intake Submission">
-  <input type="hidden" name="from_name" value="MemoVivo Legacy Intake">
+      <p class="section-label">About Your Loved One</p>
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" for="loved-one-name">Their Name <span class="req">*</span></label>
+          <input type="text" id="loved-one-name" name="Loved One Name" placeholder="Full name or nickname" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="funeral-home">Funeral Home <span class="req">*</span></label>
+          <input type="text" id="funeral-home" name="Funeral Home" placeholder="Name of funeral home" required>
+        </div>
+      </div>
 
-  <!-- Honeypot spam trap -->
-  <input type="checkbox" name="botcheck" style="display:none;">
+      <p class="section-label" style="margin-top:32px;">About You</p>
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" for="your-name">Your Name <span class="req">*</span></label>
+          <input type="text" id="your-name" name="Your Name" placeholder="Your full name" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="relationship">Your Relationship <span class="req">*</span></label>
+          <input type="text" id="relationship" name="Relationship" placeholder="e.g. daughter, husband, friend" required>
+        </div>
+      </div>
 
-  <!-- ABOUT THEIR LOVED ONE -->
-  <p class="section-label">About Your Loved One</p>
+      <div class="questions-section">
+        <p class="section-label">Seven Questions</p>
 
-  <div class="two-col">
-    <div class="field-group">
-      <label class="field-label" for="loved-one-name">Their Name <span class="req">*</span></label>
-      <input type="text" id="loved-one-name" name="Loved One Name" placeholder="Full name or nickname" required>
+        <div class="question-block">
+          <p class="question-number">Question One</p>
+          <p class="question-text">What did people call them?</p>
+          <p class="question-guide">Their full name, a nickname, what the grandkids called them — whatever felt most like them.</p>
+          <textarea name="Q1 What did people call them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <div class="question-block">
+          <p class="question-number">Question Two</p>
+          <p class="question-text">What did they love doing most?</p>
+          <p class="question-guide">Their passion, their hobby, the thing they could do for hours without noticing the time.</p>
+          <textarea name="Q2 What did they love doing most" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <div class="question-block">
+          <p class="question-number">Question Three</p>
+          <p class="question-text">Is there a place that felt most like them?</p>
+          <p class="question-guide">A room, a yard, a town, a chair by the window — wherever they seemed most at home in the world.</p>
+          <textarea name="Q3 A place that felt most like them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <div class="question-block">
+          <p class="question-number">Question Four</p>
+          <p class="question-text">Was there a phrase everyone who loved them would recognize?</p>
+          <p class="question-guide">A saying, a word they always used, something they repeated so often it became part of who they were.</p>
+          <textarea name="Q4 A phrase everyone would recognize" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <div class="question-block">
+          <p class="question-number">Question Five</p>
+          <p class="question-text">Show me a moment when they were completely happy.</p>
+          <p class="question-guide">Not a description — a moment. Where were they? Who was there? What were they doing?</p>
+          <textarea name="Q5 A moment when they were completely happy" rows="4" placeholder="Take your time with this one…"></textarea>
+        </div>
+
+        <div class="question-block">
+          <p class="question-number">Question Six</p>
+          <p class="question-text">What small ordinary thing did they always do?</p>
+          <p class="question-guide">Something so routine nobody talked about it — but everybody knew. The coffee ritual, the way they said goodbye, the sound of them moving through the house.</p>
+          <textarea name="Q6 A small ordinary thing they always did" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        </div>
+
+        <div class="question-block">
+          <p class="question-number">Question Seven</p>
+          <p class="question-text">Because of them, what is different in your life?</p>
+          <p class="question-guide">Their lasting mark. What did they leave inside you that will still be there ten years from now?</p>
+          <textarea name="Q7 Because of them what is different in your life" rows="4" placeholder="There is no wrong answer here…"></textarea>
+        </div>
+      </div>
+
+      <div class="music-section">
+        <p class="section-label">The Sound of the Song</p>
+        <p class="field-hint" style="margin-bottom:16px;">If you could choose, what would this song feel like? Select any that feel right — or write your own below.</p>
+
+        <div class="music-options">
+          <div class="music-option"><input type="checkbox" id="gospel" name="Music Style" value="Gospel / Hymn"><label for="gospel">Gospel / Hymn</label></div>
+          <div class="music-option"><input type="checkbox" id="country" name="Music Style" value="Country / Folk"><label for="country">Country / Folk</label></div>
+          <div class="music-option"><input type="checkbox" id="rb" name="Music Style" value="R&amp;B / Soul"><label for="rb">R&amp;B / Soul</label></div>
+          <div class="music-option"><input type="checkbox" id="pop" name="Music Style" value="Pop"><label for="pop">Pop</label></div>
+          <div class="music-option"><input type="checkbox" id="jazz" name="Music Style" value="Jazz / Blues"><label for="jazz">Jazz / Blues</label></div>
+          <div class="music-option"><input type="checkbox" id="classical" name="Music Style" value="Classical / Orchestral"><label for="classical">Classical / Orchestral</label></div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="music-artist">A song or artist they loved</label>
+          <span class="field-hint">This helps us find the right sound more than any genre label can.</span>
+          <input type="text" id="music-artist" name="Artist or Song Reference" placeholder="e.g. &quot;Amazing Grace&quot; or Johnny Cash">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="song-feel">How should the song feel when it ends?</label>
+          <span class="field-hint">Peaceful? Celebratory? Bittersweet? There's no wrong answer.</span>
+          <input type="text" id="song-feel" name="How song should feel" placeholder="Describe the feeling…">
+        </div>
+      </div>
+
+      <div class="submit-section">
+        <p class="submit-note">
+          Your responses go directly and securely to our songwriter.<br>
+          The song will be delivered within 24 hours of submission.
+        </p>
+        <button type="submit" class="submit-btn" id="submit-btn">Send My Memories</button>
+      </div>
+    </form>
+
+    <div class="confirmation" id="confirmation">
+      <div class="confirmation-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>Thank you.</h2>
+      <p>
+        Your memories have been received. Our songwriter will begin
+        crafting <span id="confirm-name">their</span> song right away.
+        It will be delivered within 24 hours.
+      </p>
     </div>
-    <div class="field-group">
-      <label class="field-label" for="funeral-home">Funeral Home <span class="req">*</span></label>
-      <input type="text" id="funeral-home" name="Funeral Home" placeholder="Name of funeral home" required>
-    </div>
-  </div>
-
-  <!-- ABOUT YOU -->
-  <p class="section-label" style="margin-top:32px;">About You</p>
-
-  <div class="two-col">
-    <div class="field-group">
-      <label class="field-label" for="your-name">Your Name <span class="req">*</span></label>
-      <input type="text" id="your-name" name="Your Name" placeholder="Your full name" required>
-    </div>
-    <div class="field-group">
-      <label class="field-label" for="relationship">Your Relationship <span class="req">*</span></label>
-      <input type="text" id="relationship" name="Relationship" placeholder="e.g. daughter, husband, friend" required>
-    </div>
-  </div>
-
-  <!-- THE SEVEN QUESTIONS -->
-  <div class="questions-section">
-    <p class="section-label">Seven Questions</p>
-
-    <div class="question-block">
-      <p class="question-number">Question One</p>
-      <p class="question-text">What did people call them?</p>
-      <p class="question-guide">Their full name, a nickname, what the grandkids called them — whatever felt most like them.</p>
-      <textarea name="Q1 What did people call them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
-    </div>
-
-    <div class="question-block">
-      <p class="question-number">Question Two</p>
-      <p class="question-text">What did they love doing most?</p>
-      <p class="question-guide">Their passion, their hobby, the thing they could do for hours without noticing the time.</p>
-      <textarea name="Q2 What did they love doing most" rows="3" placeholder="Write whatever comes to mind…"></textarea>
-    </div>
-
-    <div class="question-block">
-      <p class="question-number">Question Three</p>
-      <p class="question-text">Is there a place that felt most like them?</p>
-      <p class="question-guide">A room, a yard, a town, a chair by the window — wherever they seemed most at home in the world.</p>
-      <textarea name="Q3 A place that felt most like them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
-    </div>
-
-    <div class="question-block">
-      <p class="question-number">Question Four</p>
-      <p class="question-text">Was there a phrase everyone who loved them would recognize?</p>
-      <p class="question-guide">A saying, a word they always used, something they repeated so often it became part of who they were.</p>
-      <textarea name="Q4 A phrase everyone would recognize" rows="3" placeholder="Write whatever comes to mind…"></textarea>
-    </div>
-
-    <div class="question-block">
-      <p class="question-number">Question Five</p>
-      <p class="question-text">Show me a moment when they were completely happy.</p>
-      <p class="question-guide">Not a description — a moment. Where were they? Who was there? What were they doing?</p>
-      <textarea name="Q5 A moment when they were completely happy" rows="4" placeholder="Take your time with this one…"></textarea>
-    </div>
-
-    <div class="question-block">
-      <p class="question-number">Question Six</p>
-      <p class="question-text">What small ordinary thing did they always do?</p>
-      <p class="question-guide">Something so routine nobody talked about it — but everybody knew. The coffee ritual, the way they said goodbye, the sound of them moving through the house.</p>
-      <textarea name="Q6 A small ordinary thing they always did" rows="3" placeholder="Write whatever comes to mind…"></textarea>
-    </div>
-
-    <div class="question-block">
-      <p class="question-number">Question Seven</p>
-      <p class="question-text">Because of them, what is different in your life?</p>
-      <p class="question-guide">Their lasting mark. What did they leave inside you that will still be there ten years from now?</p>
-      <textarea name="Q7 Because of them what is different in your life" rows="4" placeholder="There is no wrong answer here…"></textarea>
-    </div>
-
-  </div>
-
-  <!-- MUSIC -->
-  <div class="music-section">
-    <p class="section-label">The Sound of the Song</p>
-    <p class="field-hint" style="margin-bottom:16px;">If you could choose, what would this song feel like? Select any that feel right — or write your own below.</p>
-
-    <div class="music-options">
-      <div class="music-option"><input type="checkbox" id="gospel" name="Music Style" value="Gospel / Hymn"><label for="gospel">Gospel / Hymn</label></div>
-      <div class="music-option"><input type="checkbox" id="country" name="Music Style" value="Country / Folk"><label for="country">Country / Folk</label></div>
-      <div class="music-option"><input type="checkbox" id="rb" name="Music Style" value="R&B / Soul"><label for="rb">R&amp;B / Soul</label></div>
-      <div class="music-option"><input type="checkbox" id="pop" name="Music Style" value="Pop"><label for="pop">Pop</label></div>
-      <div class="music-option"><input type="checkbox" id="jazz" name="Music Style" value="Jazz / Blues"><label for="jazz">Jazz / Blues</label></div>
-      <div class="music-option"><input type="checkbox" id="classical" name="Music Style" value="Classical / Orchestral"><label for="classical">Classical / Orchestral</label></div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label" for="music-artist">A song or artist they loved</label>
-      <span class="field-hint">This helps us find the right sound more than any genre label can.</span>
-      <input type="text" id="music-artist" name="Artist or Song Reference" placeholder="e.g. "Amazing Grace" or Johnny Cash">
-    </div>
-
-    <div class="field-group">
-      <label class="field-label" for="song-feel">How should the song feel when it ends?</label>
-      <span class="field-hint">Peaceful? Celebratory? Bittersweet? There's no wrong answer.</span>
-      <input type="text" id="song-feel" name="How song should feel" placeholder="Describe the feeling…">
-    </div>
-  </div>
-
-  <!-- SUBMIT -->
-  <div class="submit-section">
-    <p class="submit-note">
-      Your responses go directly and securely to our songwriter.<br>
-      The song will be delivered within 24 hours of submission.
-    </p>
-    <button type="submit" class="submit-btn" id="submit-btn">Send My Memories</button>
-  </div>
-
-</form>
-
-<!-- CONFIRMATION -->
-<div class="confirmation" id="confirmation">
-  <div class="confirmation-icon">
-    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-  </div>
-  <h2>Thank you.</h2>
-  <p>
-    Your memories have been received. Our songwriter will begin
-    crafting <span id="confirm-name">their</span> song right away.
-    It will be delivered within 24 hours.
-  </p>
-</div>
-```
 
   </div>
 
   <footer class="site-footer">
-    <p>MemoVivo &nbsp;·&nbsp; Every life deserves a song.</p>
+    <p>MemoVivo · Every life deserves a song.</p>
     <p style="margin-top:6px;"><a href="https://memovivo.co">memovivo.co</a></p>
   </footer>
-
 </div>
 
 <script>
@@ -592,7 +570,6 @@ select {
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
-
     const lovedOneName = document.getElementById('loved-one-name').value.trim();
     if (lovedOneName) {
       confirmName.textContent = lovedOneName + "'s";
@@ -601,11 +578,9 @@ select {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
-    // Collect checked music styles into a single field
     const checkedStyles = [...document.querySelectorAll('input[name="Music Style"]:checked')]
       .map(cb => cb.value).join(', ');
 
-    // Build JSON payload for Web3Forms
     const payload = {
       access_key: 'a4219cf2-dcb2-4d8b-b08e-66ef4f485b86',
       subject: 'MemoVivo: New Legacy Song Intake Submission',
@@ -654,6 +629,5 @@ select {
     }
   });
 </script>
-
 </body>
 </html>
