@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Song — MemoVivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --warm-white: #fdfbf8;
+    --gold: #b89a6a;
+    --gold-light: #d4b896;
+    --gold-faint: #f0e8d8;
+    --charcoal: #2c2825;
+    --mid: #6b6560;
+    --light-mid: #9e9590;
+    --rule: #ddd5c8;
+    --section-bg: #f7f3ec;
+    --rose: #c9a09a;
+    --rose-faint: #f5edec;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--warm-white);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.6rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 1.6rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero p {
+    font-size: 0.95rem;
+    color: var(--mid);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  /* ── DIVIDER ── */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 200px;
+    margin: 0 auto 3.5rem;
+  }
+  .ornament-line { flex: 1; height: 1px; background: var(--rule); }
+  .ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold-light);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── TRACK SELECTOR ── */
+  .track-selector {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 0 1.5rem 4rem;
+    flex-wrap: wrap;
+  }
+  .track-btn {
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--rule);
+    background: var(--warm-white);
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .track-btn:hover {
+    border-color: var(--gold);
+    color: var(--charcoal);
+  }
+  .track-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+  .track-note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--light-mid);
+    margin-top: -2.5rem;
+    margin-bottom: 3.5rem;
+    padding: 0 1.5rem;
+  }
+
+  /* ── FORM SECTIONS ── */
+  .form-section {
+    display: none;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+    animation: fadeUp 0.4s ease both;
+  }
+  .form-section.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION CARD ── */
+  .card {
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 2.5rem 2.8rem;
+    margin-bottom: 2rem;
+  }
+  .card-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    display: block;
+  }
+
+  /* ── FORM FIELDS ── */
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.4rem;
+  }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1.4rem;
+  }
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  label .req { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--rule);
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+    background: var(--warm-white);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.7;
+  }
+
+  /* ── QUESTION BLOCKS ── */
+  .q-block {
+    border-top: 1px solid var(--gold-faint);
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+  .q-number {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .q-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 0.35rem;
+    line-height: 1.4;
+  }
+  .q-hint {
+    font-size: 0.8rem;
+    color: var(--light-mid);
+    margin-bottom: 0.75rem;
+    line-height: 1.65;
+  }
+
+  /* ── GENRE PILLS ── */
+  .genre-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .genre-pill {
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--mid);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    background: var(--cream);
+  }
+  .genre-pill:hover { border-color: var(--gold-light); color: var(--charcoal); }
+  .genre-pill.selected {
+    background: var(--gold-faint);
+    border-color: var(--gold);
+    color: var(--charcoal);
+  }
+
+  /* ── SUBMIT ── */
+  .submit-wrap { text-align: center; padding: 1rem 0 0.5rem; }
+  .submit-btn {
+    display: inline-block;
+    padding: 1rem 3.2rem;
+    background: var(--charcoal);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.15s;
+  }
+  .submit-btn:hover { background: var(--gold); transform: translateY(-1px); }
+  .privacy-note {
+    font-size: 0.72rem;
+    color: var(--light-mid);
+    margin-top: 1rem;
+    line-height: 1.7;
+  }
+
+  /* ── THANK YOU ── */
+  #thank-you {
+    display: none;
+    text-align: center;
+    padding: 6rem 2rem 8rem;
+    max-width: 540px;
+    margin: 0 auto;
+    animation: fadeUp 0.5s ease both;
+  }
+  #thank-you h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    color: var(--charcoal);
+  }
+  #thank-you p {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.9;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-size: 0.72rem;
+    color: var(--light-mid);
+    letter-spacing: 0.08em;
+    background: var(--warm-white);
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── COUPLE / FATHER COLOR ACCENTS ── */
+  .couple-accent .card-label,
+  .couple-accent .q-number { color: var(--gold); }
+
+  .father-accent .card-label,
+  .father-accent .q-number { color: var(--rose); }
+  .father-accent .card { border-top: 2px solid var(--rose-faint); }
+  .father-accent .q-block { border-top-color: var(--rose-faint); }
+  .father-accent input:focus,
+  .father-accent textarea:focus,
+  .father-accent select:focus { border-color: var(--rose); }
+  .father-accent .genre-pill.selected {
+    background: var(--rose-faint);
+    border-color: var(--rose);
+  }
+  .father-accent .submit-btn:hover { background: var(--rose); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://memovivo.co" class="nav-brand">MemoVivo</a>
+  <span class="nav-sub">Wedding Song</span>
+</nav>
+
+<div id="main-content">
+
+  <div class="hero">
+    <p class="hero-eyebrow">Wedding Song Intake</p>
+    <h1>A song written from <em>your story.</em></h1>
+    <p>There is no right or wrong way to answer these questions.<br>
+    Write as much or as little as feels natural.<br>
+    Your words — even a single sentence — are enough to begin.</p>
+  </div>
+
+  <div class="ornament">
+    <span class="ornament-line"></span>
+    <span class="ornament-diamond"></span>
+    <span class="ornament-line"></span>
+  </div>
+
+  <!-- TRACK SELECTOR -->
+  <div class="track-selector">
+    <button class="track-btn active" onclick="showTrack('couple', this)">
+      Bride &amp; Groom · First Dance
+    </button>
+    <button class="track-btn" onclick="showTrack('father', this)">
+      Father · Daughter Dance
+    </button>
+  </div>
+  <p class="track-note">Choose your song. You can complete both if you'd like two songs.</p>
+
+  <!-- ════════════════════════════════════════
+       COUPLE TRACK
+  ════════════════════════════════════════ -->
+  <div id="track-couple" class="form-section couple-accent visible">
+    <form id="form-couple" onsubmit="handleSubmit(event, 'couple')">
+
+      <!-- About -->
+      <div class="card">
+        <span class="card-label">About the Couple</span>
+        <div class="field-row">
+          <div class="field">
+            <label>Bride's Name <span class="req">*</span></label>
+            <input type="text" name="bride_name" placeholder="First name or full name" required>
+          </div>
+          <div class="field">
+            <label>Groom's Name <span class="req">*</span></label>
+            <input type="text" name="groom_name" placeholder="First name or full name">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Wedding Date</label>
+            <input type="text" name="wedding_date" placeholder="Month DD, YYYY">
+          </div>
+          <div class="field">
+            <label>Your Email <span class="req">*</span></label>
+            <input type="email" name="couple_email" placeholder="Where we'll deliver the song" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Who is answering these questions?</label>
+          <input type="text" name="responder_couple" placeholder="e.g. The bride, both of us, maid of honor">
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div class="card">
+        <span class="card-label">Seven Questions</span>
+
+        <div class="q-block" style="border-top: none; padding-top: 0; margin-top: 0;">
+          <span class="q-number">Question One</span>
+          <p class="q-label">When did you first know this was the one?</p>
+          <p class="q-hint">Not when you decided — when you <em>knew.</em> A specific moment, a look, a sentence. Where were you? What were you doing?</p>
+          <textarea name="q1" placeholder="Take your time with this one…"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Two</span>
+          <p class="q-label">What quirk or flaw of theirs do you now love?</p>
+          <p class="q-hint">Something that might have annoyed anyone else, but became part of why you chose them. The honest ones make the best songs.</p>
+          <textarea name="q2"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Three</span>
+          <p class="q-label">Was there a hard season — and what got you through?</p>
+          <p class="q-hint">A time when things weren't easy. You don't have to name what it was — just what it showed you about this person.</p>
+          <textarea name="q3"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Four</span>
+          <p class="q-label">What is the one promise you most want to make today?</p>
+          <p class="q-hint">Not "love and cherish forever" — the specific thing you are promising <em>this</em> person. What will you always do?</p>
+          <textarea name="q4"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Five</span>
+          <p class="q-label">Show me an ordinary moment you would live inside forever.</p>
+          <p class="q-hint">Not a vacation or a milestone — a Tuesday. The kitchen, a car ride, a couch. What were you two doing?</p>
+          <textarea name="q5"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Six</span>
+          <p class="q-label">Who were you before them — and who are you now?</p>
+          <p class="q-hint">Even a sentence. What changed when this person came into your life?</p>
+          <textarea name="q6"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Seven</span>
+          <p class="q-label">What do you most want them to feel as this song plays?</p>
+          <p class="q-hint">The feeling the song should leave behind. Seen? Certain? Home? In your own words.</p>
+          <textarea name="q7"></textarea>
+        </div>
+      </div>
+
+      <!-- Sound -->
+      <div class="card">
+        <span class="card-label">The Sound of the Song</span>
+
+        <div class="field">
+          <label>What should this song feel like? Choose any that fit.</label>
+          <div class="genre-grid" id="genres-couple">
+            <span class="genre-pill" onclick="toggleGenre(this)">Country / Americana</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Pop</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Folk / Acoustic</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">R&amp;B / Soul</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Gospel</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Jazz / Ballad</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Cinematic / Orchestral</span>
+          </div>
+          <input type="hidden" name="genres_couple" id="genres-couple-val">
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Reference</span>
+          <p class="q-label">A song or artist you both love.</p>
+          <p class="q-hint">This helps us find the right sound more than any genre label can.</p>
+          <textarea name="sound_ref_couple" style="min-height: 60px;"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Feeling</span>
+          <p class="q-label">How should the song feel when it ends?</p>
+          <p class="q-hint">Joyful? Tender? Triumphant? Bittersweet? Write anything that comes.</p>
+          <textarea name="feeling_couple" style="min-height: 60px;"></textarea>
+        </div>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit" class="submit-btn">Send Our Story</button>
+        <p class="privacy-note">Your responses go directly and securely to our songwriter.<br>
+        The song will be delivered within 24 hours of submission.</p>
+      </div>
+    </form>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       FATHER-DAUGHTER TRACK
+  ════════════════════════════════════════ -->
+  <div id="track-father" class="form-section father-accent">
+    <form id="form-father" onsubmit="handleSubmit(event, 'father')">
+
+      <!-- About -->
+      <div class="card">
+        <span class="card-label">About Your Family</span>
+        <div class="field-row">
+          <div class="field">
+            <label>Daughter's Name <span class="req">*</span></label>
+            <input type="text" name="daughter_name" placeholder="First name" required>
+          </div>
+          <div class="field">
+            <label>Father's Name <span class="req">*</span></label>
+            <input type="text" name="father_name" placeholder="First name" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Mother's Name <span style="font-size:0.65rem; color: var(--light-mid);">(if also contributing)</span></label>
+            <input type="text" name="mother_name" placeholder="Optional">
+          </div>
+          <div class="field">
+            <label>Wedding Date</label>
+            <input type="text" name="wedding_date_fd" placeholder="Month DD, YYYY">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Your Email <span class="req">*</span></label>
+            <input type="email" name="father_email" placeholder="Where we'll deliver the song" required>
+          </div>
+          <div class="field">
+            <label>Who is answering these questions?</label>
+            <input type="text" name="responder_father" placeholder="e.g. The father, both parents">
+          </div>
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div class="card">
+        <span class="card-label">Seven Questions</span>
+
+        <div class="q-block" style="border-top: none; padding-top: 0; margin-top: 0;">
+          <span class="q-number">Question One</span>
+          <p class="q-label">What is your earliest memory of her?</p>
+          <p class="q-hint">A specific scene — her age, where you were, what she was doing. This is where the song will begin.</p>
+          <textarea name="q8" placeholder="Take your time with this one…"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Two</span>
+          <p class="q-label">Is there something she always did as a little girl?</p>
+          <p class="q-hint">A habit, a phrase, a game she invented, the way she laughed — something that was completely and only her.</p>
+          <textarea name="q9"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Three</span>
+          <p class="q-label">When did you first know she was going to be okay on her own?</p>
+          <p class="q-hint">The moment you saw who she was becoming. Where were you? What did she do or say?</p>
+          <textarea name="q10"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Four</span>
+          <p class="q-label">What do you see in the person she chose?</p>
+          <p class="q-hint">What made you feel at peace about handing her heart to someone else?</p>
+          <textarea name="q11"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Five</span>
+          <p class="q-label">What have you always wanted her to know?</p>
+          <p class="q-hint">The thing you've felt but may not have said often enough. This becomes the heart of the song.</p>
+          <textarea name="q12"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Six</span>
+          <p class="q-label">Complete this sentence: <em>"She taught me…"</em></p>
+          <p class="q-hint">What did this daughter teach her father? Something surprising or true about what she gave you.</p>
+          <textarea name="q13" placeholder="She taught me…"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Question Seven</span>
+          <p class="q-label">What is the honest mix of feelings today?</p>
+          <p class="q-hint">Don't smooth it over. If there's joy and grief together, name both. The best songs hold both at once.</p>
+          <textarea name="q14"></textarea>
+        </div>
+      </div>
+
+      <!-- Sound -->
+      <div class="card">
+        <span class="card-label">The Sound of the Song</span>
+
+        <div class="field">
+          <label>What should this song feel like? Choose any that fit.</label>
+          <div class="genre-grid" id="genres-father">
+            <span class="genre-pill" onclick="toggleGenre(this)">Country / Americana</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Pop</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Folk / Acoustic</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">R&amp;B / Soul</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Gospel</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Jazz / Ballad</span>
+            <span class="genre-pill" onclick="toggleGenre(this)">Cinematic / Orchestral</span>
+          </div>
+          <input type="hidden" name="genres_father" id="genres-father-val">
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Reference</span>
+          <p class="q-label">A song or artist that feels right.</p>
+          <p class="q-hint">A song you've heard at a wedding, a song she loves, an artist that captures the tone — any of these help.</p>
+          <textarea name="sound_ref_father" style="min-height: 60px;"></textarea>
+        </div>
+
+        <div class="q-block">
+          <span class="q-number">Feeling</span>
+          <p class="q-label">How should the song feel when it ends?</p>
+          <p class="q-hint">Peaceful? Celebratory? Tearful but grateful? Write anything that comes.</p>
+          <textarea name="feeling_father" style="min-height: 60px;"></textarea>
+        </div>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit" class="submit-btn">Send My Story</button>
+        <p class="privacy-note">Your responses go directly and securely to our songwriter.<br>
+        The song will be delivered within 24 hours of submission.</p>
+      </div>
+    </form>
+  </div>
+
+  <!-- THANK YOU -->
+  <div id="thank-you">
+    <div class="ornament" style="margin-bottom: 2rem;">
+      <span class="ornament-line"></span>
+      <span class="ornament-diamond"></span>
+      <span class="ornament-line"></span>
+    </div>
+    <h2>Thank you.</h2>
+    <p>Your memories have been received.<br>
+    Our songwriter will begin crafting the song right away.<br>
+    It will be delivered within 24 hours.</p>
+  </div>
+
+</div><!-- /main-content -->
+
+<footer>
+  MemoVivo &nbsp;·&nbsp; Every life deserves a song. &nbsp;·&nbsp; <a href="https://memovivo.co">memovivo.co</a>
+</footer>
+
+<script>
+  function showTrack(track, btn) {
+    document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('visible'));
+    const target = document.getElementById('track-' + track);
+    target.classList.add('visible');
+
+    // re-trigger animation
+    target.style.animation = 'none';
+    target.offsetHeight;
+    target.style.animation = '';
+  }
+
+  function toggleGenre(el) {
+    el.classList.toggle('selected');
+    // sync hidden field
+    const container = el.closest('.genre-grid');
+    const hiddenId = container.id.replace('genres-', 'genres-') + '-val';
+    const hidden = document.getElementById(hiddenId);
+    if (!hidden) return;
+    const selected = Array.from(container.querySelectorAll('.selected')).map(p => p.textContent.trim());
+    hidden.value = selected.join(', ');
+  }
+
+  function handleSubmit(e, track) {
+    e.preventDefault();
+    // In production: POST form data here
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('thank-you').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
