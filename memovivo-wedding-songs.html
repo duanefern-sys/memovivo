@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MemoVivo Wedding Song Suite — For Wedding Planners</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #faf7f2;
+    --cream: #f3ede3;
+    --champagne: #e8d9c0;
+    --gold: #b8975a;
+    --gold-light: #d4b07a;
+    --deep: #1a1410;
+    --warm-dark: #2d2418;
+    --sage: #7a8c72;
+    --blush: #c4897a;
+    --slate: #6b7280;
+    --text: #3a2e24;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--warm-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(184,151,90,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 100% 100%, rgba(196,137,122,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 0% 50%, rgba(122,140,114,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    color: var(--ivory);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    color: var(--champagne);
+    margin-bottom: 48px;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem;
+    color: rgba(250,247,242,0.6);
+    max-width: 480px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+
+  .scroll-cue span {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: rgba(250,247,242,0.4);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── INTRO SECTION ── */
+  .intro {
+    background: var(--cream);
+    padding: 100px 40px;
+    text-align: center;
+  }
+
+  .intro-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 28px;
+    line-height: 1.3;
+  }
+
+  .intro p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+
+  .intro p strong {
+    font-weight: 500;
+    color: var(--warm-dark);
+  }
+
+  /* ── SUITE OVERVIEW ── */
+  .suite-overview {
+    background: var(--warm-dark);
+    padding: 100px 40px;
+  }
+
+  .suite-overview-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .suite-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .suite-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 16px;
+  }
+
+  .suite-header p {
+    color: var(--champagne);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 44px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold) 15%, var(--gold) 85%, transparent);
+    opacity: 0.4;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0 32px;
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(184,151,90,0.15);
+    transition: background 0.3s;
+  }
+
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+  }
+
+  .dot-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: var(--warm-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dot-circle.filled { background: var(--gold); }
+
+  .dot-num {
+    font-size: 0.7rem;
+    color: rgba(184,151,90,0.5);
+    letter-spacing: 0.1em;
+  }
+
+  .timeline-content {}
+
+  .event-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .timeline-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 8px;
+  }
+
+  .timeline-content p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--champagne);
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  .timeline-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  .meta-chip.tone-sacred { border-color: rgba(122,140,114,0.5); color: var(--sage); }
+  .meta-chip.tone-joy { border-color: rgba(184,151,90,0.5); color: var(--gold-light); }
+  .meta-chip.tone-tender { border-color: rgba(196,137,122,0.5); color: var(--blush); }
+  .meta-chip.tone-funny { border-color: rgba(184,151,90,0.7); color: #e8c97a; }
+  .meta-chip.suno { border-color: rgba(250,247,242,0.2); color: rgba(250,247,242,0.5); }
+
+  /* ── INTAKE SECTIONS ── */
+  .intake-section {
+    padding: 100px 40px;
+    border-bottom: 1px solid var(--champagne);
+  }
+
+  .intake-section:nth-child(odd) { background: var(--ivory); }
+  .intake-section:nth-child(even) { background: var(--cream); }
+
+  .intake-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .intake-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: start;
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--champagne);
+  }
+
+  .intake-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .icon-gold { background: linear-gradient(135deg, var(--champagne), var(--gold-light)); }
+  .icon-blush { background: linear-gradient(135deg, #e8c4bb, var(--blush)); }
+  .icon-sage { background: linear-gradient(135deg, #b8c9b3, var(--sage)); }
+
+  .intake-title {}
+
+  .intake-event-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .intake-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .intake-title p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  .questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .question-card {
+    background: white;
+    border-radius: 4px;
+    padding: 28px 32px;
+    border-left: 3px solid var(--champagne);
+    transition: border-color 0.3s, transform 0.2s;
+    position: relative;
+  }
+
+  .question-card:hover {
+    border-left-color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .q-number {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .q-note {
+    font-size: 0.82rem;
+    color: var(--slate);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .q-tag {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--cream);
+    color: var(--gold);
+  }
+
+  .q-tag.laugh { background: #fef9e8; color: #a0821a; }
+  .q-tag.tender { background: #fdf0ed; color: #9a5d52; }
+  .q-tag.funny { background: #fef9e8; color: #a0821a; }
+  .q-tag.honest { background: #f0f4ee; color: #5a6e54; }
+
+  /* ── SUNO SECTION ── */
+  .suno-section {
+    background: var(--warm-dark);
+    padding: 100px 40px;
+    text-align: center;
+  }
+
+  .suno-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .suno-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 24px;
+  }
+
+  .suno-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--champagne);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+
+  .suno-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-top: 60px;
+    text-align: left;
+  }
+
+  .suno-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(184,151,90,0.2);
+    border-radius: 4px;
+    padding: 28px 24px;
+    transition: border-color 0.3s;
+  }
+
+  .suno-step:hover { border-color: rgba(184,151,90,0.5); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: rgba(184,151,90,0.3);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .suno-step h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ivory);
+    margin-bottom: 8px;
+  }
+
+  .suno-step p {
+    font-size: 0.88rem;
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(250,247,242,0.55);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--cream);
+    padding: 100px 40px;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .cta-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 40px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--warm-dark);
+    color: var(--champagne);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    border: 1px solid var(--warm-dark);
+  }
+
+  .cta-btn:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--warm-dark);
+  }
+
+  .cta-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 48px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    padding: 48px 40px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(250,247,242,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  footer .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .intake-header { grid-template-columns: 1fr; }
+    .intake-icon { display: none; }
+    .timeline::before { display: none; }
+    .timeline-item { grid-template-columns: 1fr; }
+    .timeline-dot { flex-direction: row; gap: 12px; }
+    .question-card { padding: 20px 20px; }
+    .q-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-ornament">MemoVivo — Wedding Song Suite</p>
+  <h1>Songs That<br><em>Live Inside</em><br>the Moment</h1>
+  <p class="hero-sub">Six personalized songs. Every key moment of the wedding weekend. For couples who want the day to feel like them.</p>
+  <div class="hero-divider"></div>
+  <p class="hero-tagline">A resource guide for wedding planners — everything you need to know to offer this experience to your clients.</p>
+  <div class="scroll-cue">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── INTRO ── -->
+<section class="intro">
+  <div class="intro-inner">
+    <p class="section-label">What This Is</p>
+    <h2>A Song for Every Moment That Matters</h2>
+    <p>Most couples choose a song from a playlist. A few lucky ones commission something original. MemoVivo makes the original song <strong>accessible to every couple</strong> — through a simple intake process, professional lyric writing, and AI-assisted music production via Suno.</p>
+    <p>The result is a fully produced, custom song tailored to that specific couple — their story, their voices, their people. No generic lyrics. No borrowed emotion. Something that, when it plays, makes everyone in the room feel like they're hearing the truth.</p>
+    <p>And because Suno can generate a full backing track with the AI vocal removed, someone who loves the couple can <strong>perform it live</strong> — no musical experience required.</p>
+  </div>
+</section>
+
+<!-- ── SUITE OVERVIEW ── -->
+<section class="suite-overview">
+  <div class="suite-overview-inner">
+    <div class="suite-header">
+      <p class="section-label" style="color:var(--gold)">The Complete Suite</p>
+      <h2>Six Songs. Six Moments.</h2>
+      <p>From the rehearsal dinner through the final dance — every emotionally significant moment of the wedding weekend, personalized.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot">
+          <div class="dot-circle"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="2.5" fill="#b8975a"/></svg></div>
+          <span class="dot-num">01</span>
+        </div>
+        <div class="timeline-content">
+          <p class="event-tag">Rehearsal Dinner · The Night Before</p>
+          <h3>The Comedy Toast Song</h3>
+          <p>A warmly funny, roast-adjacent song performed by the best man or maid of honor. Inside jokes, lovable embarrassments, the story of how the couple got together — set to music and delivered live at the rehearsal dinner table.</p>
+          <div class="timeline-meta">
+            <span class="meta-chip tone-funny">Funny &amp; Warm</span>
+            <span class="meta-chip suno">Live Performance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">
+          <div class="dot-circle filled"></div>
+          <span class="dot-num">02</span>
+        </div>
+        <div class="timeline-content">
+          <p class="event-tag">Wedding Ceremony · The Processional or Unity Moment</p>
+          <h3>The Ceremony Song</h3>
+          <p>A sacred, covenant-centered song written for the couple together — performed during the processional, unity candle, or as a purely instrumental piece that carries the room into the moment.</p>
+          <div class="timeline-meta">
+            <span class="meta-chip tone-sacred">Sacred &amp; Reverent</span>
+            <span class="meta-chip suno">Instrumental or Vocal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">
+          <div class="dot-circle"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="2.5" fill="#b8975a"/></svg></div>
+          <span class="dot-num">03</span>
+        </div>
+        <div class="timeline-content">
+          <p class="event-tag">Reception · First Dance</p>
+          <h3>The Couple's First Dance Song</h3>
+          <p>The couple's song — romantic, celebratory, specific to their relationship. Uses the same couple intake but written with the reception's more joyful register. The room exhales, and this plays.</p>
+          <div class="timeline-meta">
+            <span class="meta-chip tone-joy">Romantic &amp; Celebratory</span>
+            <span class="meta-chip suno">Fully Produced Track</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">
+          <div class="dot-circle filled"></div>
+          <span class="dot-num">04</span>
+        </div>
+        <div class="timeline-content">
+          <p class="event-tag">Reception · Father–Daughter Dance</p>
+          <h3>The Father's Song to His Daughter</h3>
+          <p>The father's tribute — built from his own memories, his voice, his specific love for her. The great father-daughter songs hold both the joy of pride and the grief of release. This one earns both.</p>
+          <div class="timeline-meta">
+            <span class="meta-chip tone-tender">Tender &amp; Releasing</span>
+            <span class="meta-chip suno">Dad Can Perform It Live</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">
+          <div class="dot-circle"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="2.5" fill="#b8975a"/></svg></div>
+          <span class="dot-num">05</span>
+        </div>
+        <div class="timeline-content">
+          <p class="event-tag">Reception · Groom–Mother Dance</p>
+          <h3>The Mother's Song to Her Son</h3>
+          <p>The mirror of the father-daughter song — and one of the most underserved moments in any wedding. A mother watching her son marry carries a weight no generic song has ever captured. This one does.</p>
+          <div class="timeline-meta">
+            <span class="meta-chip tone-tender">Tender &amp; Proud</span>
+            <span class="meta-chip suno">Mom Can Perform It Live</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">
+          <div class="dot-circle filled"></div>
+          <span class="dot-num">06</span>
+        </div>
+        <div class="timeline-content">
+          <p class="event-tag">Reception · Best Man or Maid of Honor Toast</p>
+          <h3>The Best Man / MOH Song</h3>
+          <p>The toast performed as a song — a tribute from the couple's closest friend, funny and genuinely moving in equal measure. With a backing track, even someone who "can't sing" can deliver a performance nobody will forget.</p>
+          <div class="timeline-meta">
+            <span class="meta-chip tone-funny">Funny to Moving</span>
+            <span class="meta-chip suno">Backing Track Option</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     INTAKE TRACK 1: COMEDY / REHEARSAL DINNER
+══════════════════════════════════════ -->
+<section class="intake-section" id="track-comedy">
+  <div class="intake-inner">
+    <div class="intake-header">
+      <div class="intake-icon icon-gold">🎭</div>
+      <div class="intake-title">
+        <p class="intake-event-label">Rehearsal Dinner · Best Man or MOH Performs</p>
+        <h2>The Comedy Toast Song<br><em>Intake Questions</em></h2>
+        <p>Completed by the best man, maid of honor, or anyone who knows the couple's story with insider detail. The goal is warmly funny — affectionate roasting that resolves in genuine love. These answers become the raw material for a song that gets the most laughs and the most tears of the entire weekend.</p>
+      </div>
+    </div>
+
+    <div class="questions-list">
+
+      <div class="question-card">
+        <p class="q-number">Q1 — The Origin Story</p>
+        <p class="q-text">Tell me how these two actually got together — the real version, not the cleaned-up one. What's the detail most people don't know?</p>
+        <p class="q-note">This is almost always Verse 1. The more specific and slightly embarrassing, the better the song.</p>
+        <span class="q-tag funny">Funny</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q2 — The First Impression</p>
+        <p class="q-text">What did [Name] say about [Partner] the very first time? Be honest. What was the exact reaction when they came home or texted you about this person?</p>
+        <p class="q-note">The contrast between "first impression" and "now marrying them" is one of the richest comedy structures in a toast song.</p>
+        <span class="q-tag funny">Funny</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q3 — The Defining Quirk</p>
+        <p class="q-text">What is the one habit, quirk, or recurring behavior of one of them that the other has had to accept as part of the deal?</p>
+        <p class="q-note">The most lovable songs name a real imperfection and celebrate it. This is the heart of the song's comedy.</p>
+        <span class="q-tag funny">Funny</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q4 — The Worst Trip or Adventure</p>
+        <p class="q-text">Describe the most disastrous trip, event, or plan these two attempted together. What went wrong, and how did they handle it?</p>
+        <p class="q-note">Shared disasters are the best proof of compatibility. "They survived [that trip] and still chose each other" is a powerful bridge line.</p>
+        <span class="q-tag funny">Funny</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q5 — The Running Joke</p>
+        <p class="q-text">Is there a phrase, reference, or inside joke between the two of them — or between you and them — that their close circle would immediately recognize?</p>
+        <p class="q-note">Even one line that lands with 20 people in the room creates a moment of belonging. Use with care — it must be warm, not exclusive.</p>
+        <span class="q-tag laugh">Laugh</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q6 — The Moment You Knew It Was Real</p>
+        <p class="q-text">At what point did you stop being skeptical and think — okay, this is actually going to happen? What changed your mind?</p>
+        <p class="q-note">This is the emotional hinge of the song — the turn from comedy to warmth. It can be funny, tender, or both.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q7 — What You'd Say If You Had Thirty Seconds</p>
+        <p class="q-text">Set aside the jokes. If you had thirty seconds to tell this couple the most true thing you know about them together — what would you say?</p>
+        <p class="q-note">This becomes the song's final chorus or outro. The whole comedy structure exists to earn this moment.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q8 — The Performer's Voice</p>
+        <p class="q-text">How would you describe your own relationship with this couple — and what's one thing about performing this song that both excites and terrifies you?</p>
+        <p class="q-note">This helps us calibrate the voice of the song and write performable lines for someone who may not be a natural singer.</p>
+        <span class="q-tag honest">Honest</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     INTAKE TRACK 2: GROOM–MOTHER DANCE
+══════════════════════════════════════ -->
+<section class="intake-section" id="track-mother-son">
+  <div class="intake-inner">
+    <div class="intake-header">
+      <div class="intake-icon icon-blush">🤍</div>
+      <div class="intake-title">
+        <p class="intake-event-label">Reception · Groom–Mother Dance</p>
+        <h2>The Mother's Song<br><em>Intake Questions</em></h2>
+        <p>Completed by the groom's mother — or by the groom himself as a tribute to his mother. One of the most emotionally complex and least-served moments in any wedding. A mother watching her son marry carries pride, release, a lifetime of memory, and a grief she can't quite name. These questions draw that all out.</p>
+      </div>
+    </div>
+
+    <div class="questions-list">
+
+      <div class="question-card">
+        <p class="q-number">Q1 — The Earliest Memory</p>
+        <p class="q-text">What is the earliest memory you have of him that you can still see clearly — a moment, a look, something he said or did that you have never forgotten?</p>
+        <p class="q-note">This is Verse 1. It anchors the song in the beginning of his life so the listener travels the full distance by the end.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q2 — The Boy He Was</p>
+        <p class="q-text">What did he love most as a little boy — what was the thing he was most himself doing?</p>
+        <p class="q-note">Specificity here is everything. "He loved baseball" is generic. "He used to line up all his baseball cards by batting average every Sunday morning" is a lyric.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q3 — What He Carried from You</p>
+        <p class="q-text">What is something you hoped you gave him — a value, a habit, a way of being in the world — that you actually see in him now?</p>
+        <p class="q-note">This is one of the song's most powerful moments: the mother seeing her own investment returned in a grown man.</p>
+        <span class="q-tag honest">Honest</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q4 — The Hard Season</p>
+        <p class="q-text">Was there a time in his growing up when things were hard — for him or for your family — and you saw something in him that made you believe he'd be okay?</p>
+        <p class="q-note">The great mother-son songs don't skip the hard parts. The difficulty is what earns the pride.</p>
+        <span class="q-tag honest">Honest</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q5 — When You Knew He'd Found the Right One</p>
+        <p class="q-text">At what moment did you know that the person he chose was truly right for him? What did you see?</p>
+        <p class="q-note">This belongs in the bridge — the turn from "my son" to "your marriage." It's the handoff, and it needs to be specific.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q6 — What He Taught You</p>
+        <p class="q-text">Complete this sentence: "I never expected to learn __________ from my own child, but he taught me that."</p>
+        <p class="q-note">The reversal — the mother acknowledging what she received from her son — is one of the most powerful lyric moments possible. It shifts the dynamic completely.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q7 — What You've Always Wanted Him to Know</p>
+        <p class="q-text">If you could say one thing to him today that you have never said perfectly enough — what would it be?</p>
+        <p class="q-note">This is the chorus. It must be true enough that hearing it three times feels more true, not less.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q8 — The Bittersweet Truth</p>
+        <p class="q-text">Describe honestly what today feels like — both the joy and whatever else is in there. Don't just tell me the happy part.</p>
+        <p class="q-note">The song must honor both. A mother who says only "I'm so happy" is not telling the whole truth, and the room will feel it. The bittersweet is what makes the song real.</p>
+        <span class="q-tag honest">Honest</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q9 — The Blessing</p>
+        <p class="q-text">What is the blessing you want to send them into their marriage with — not advice, but a blessing. Something you speak over them.</p>
+        <p class="q-note">This becomes the outro. The song should end in blessing, not in sentiment. There is a difference.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     INTAKE TRACK 3: BEST MAN / MOH RECEPTION TOAST SONG
+══════════════════════════════════════ -->
+<section class="intake-section" id="track-toast">
+  <div class="intake-inner">
+    <div class="intake-header">
+      <div class="intake-icon icon-sage">🎤</div>
+      <div class="intake-title">
+        <p class="intake-event-label">Reception · Performed by Best Man or Maid of Honor</p>
+        <h2>The Toast Song<br><em>Intake Questions</em></h2>
+        <p>This is the toast performed as a song — funnier and more moving than anything a spoken toast alone can deliver. Completed by the best man or maid of honor. Different from the rehearsal dinner comedy song in that it's designed for the larger reception room and aims to travel from laughter to genuine love in under three minutes.</p>
+      </div>
+    </div>
+
+    <div class="questions-list">
+
+      <div class="question-card">
+        <p class="q-number">Q1 — How You Know Them</p>
+        <p class="q-text">In two sentences: who are you to this couple, and how long have you known the person you're toasting?</p>
+        <p class="q-note">This grounds the voice of the song. A best friend of 20 years sings differently than a college roommate of 3 years. The authenticity of the relationship shapes every line.</p>
+        <span class="q-tag honest">Honest</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q2 — The Story That Defines Them</p>
+        <p class="q-text">What is the single story about this person — before or during this relationship — that tells you everything about who they are?</p>
+        <p class="q-note">The best toast songs are built around one story, not a list of qualities. Give us the story and we'll find the song inside it.</p>
+        <span class="q-tag funny">Funny</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q3 — What Changed When They Found Each Other</p>
+        <p class="q-text">What is different about your friend now that they're with this person? What do you see in them that wasn't there before?</p>
+        <p class="q-note">This is the heart of the toast song — the observation that only a close friend can make. "She laughs louder." "He actually shows up on time now." Specifics over adjectives.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q4 — The Lovable Absurdity</p>
+        <p class="q-text">What is the most absurd, slightly unbelievable, or charmingly ridiculous thing about this couple together that perfectly sums them up?</p>
+        <p class="q-note">Every great couple has a thing — a shared weirdness that is completely their own. This detail, sung, gets the biggest laugh and somehow also the biggest feeling.</p>
+        <span class="q-tag laugh">Laugh</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q5 — The Thing the Partner Doesn't Know</p>
+        <p class="q-text">Is there something your friend told you early on about their partner — something they said when they didn't know it was serious yet — that now, looking back, reveals everything?</p>
+        <p class="q-note">This is the pre-chorus or bridge material — the revelation moment. "She didn't know it yet, but she was already describing the person she'd marry."</p>
+        <span class="q-tag funny">Funny</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q6 — What You Want the Partner to Know</p>
+        <p class="q-text">What do you want [Partner's name] to know about the person they're marrying — something only you can tell them?</p>
+        <p class="q-note">This is the song's most surprising turn — addressing the partner directly. Done well, it makes the partner cry and the room too.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q7 — The Toast</p>
+        <p class="q-text">Set aside the microphone for a moment. What do you actually want to say to these two people? Not the funny version — the true version.</p>
+        <p class="q-note">This becomes the final chorus or outro. Everything funny in the song exists to earn this moment of truth.</p>
+        <span class="q-tag tender">Tender</span>
+      </div>
+
+      <div class="question-card">
+        <p class="q-number">Q8 — The Performer Note</p>
+        <p class="q-text">On a scale of 1–10, how comfortable are you performing in front of people? And: do you want a backing track to sing along to, or are you aiming to have someone else perform while you stand with the couple?</p>
+        <p class="q-note">This determines whether we write for a singer-performer or for someone delivering a spoken-song hybrid with musical support. Both are great. We just write differently for each.</p>
+        <span class="q-tag honest">Honest</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SUNO / HOW IT WORKS ── -->
+<section class="suno-section">
+  <div class="suno-inner">
+    <p class="section-label" style="color:var(--gold)">The Production Process</p>
+    <h2>From Memory to Music in Four Steps</h2>
+    <p>MemoVivo handles everything from intake to delivery. The couple or their loved ones answer the questions. We write the lyrics. Suno generates a fully produced track. The vocal is removed and a backing track is delivered — ready for a live performance or played as-is at the event.</p>
+
+    <div class="suno-steps">
+      <div class="suno-step">
+        <div class="step-num">01</div>
+        <h4>Intake</h4>
+        <p>The respondent answers the questions for their track — online, at their own pace, in their own words.</p>
+      </div>
+      <div class="suno-step">
+        <div class="step-num">02</div>
+        <h4>Lyric Writing</h4>
+        <p>Professional lyrics are written from the intake responses — personalized, singable, emotionally true.</p>
+      </div>
+      <div class="suno-step">
+        <div class="step-num">03</div>
+        <h4>Music Production</h4>
+        <p>Suno generates a fully produced song in the requested genre. Multiple versions are created for selection.</p>
+      </div>
+      <div class="suno-step">
+        <div class="step-num">04</div>
+        <h4>Backing Track Delivery</h4>
+        <p>The AI vocal is removed. A clean backing track is delivered — ready for a live performer or for the event as-is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="section-label">Work With Us</p>
+    <div class="cta-divider"></div>
+    <h2>Offer Your Clients Something<br>Nobody Else Can</h2>
+    <p>Wedding planners who partner with MemoVivo add a deeply personal, highly memorable experience to their service offering — one that requires no additional time from them and delivers something their clients will talk about for the rest of their lives.</p>
+    <a href="mailto:hello@memovivo.com" class="cta-btn">Get in Touch</a>
+  </div>
+</section>
+
+<footer>
+  <span class="brand">MemoVivo</span>
+  <p>Tribute &amp; Memory Services &nbsp;·&nbsp; memovivo.com &nbsp;·&nbsp; Designed for wedding planners</p>
+</footer>
+
+</body>
+</html>
