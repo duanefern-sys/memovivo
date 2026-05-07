@@ -36,7 +36,6 @@
       position: relative;
     }
 
-    /* Deep warm background with subtle vignette */
     body::before {
       content: '';
       position: fixed;
@@ -49,7 +48,6 @@
       z-index: 0;
     }
 
-    /* Grain texture */
     body::after {
       content: '';
       position: fixed;
@@ -68,7 +66,6 @@
       padding: 0 24px 100px;
     }
 
-    /* ── HERO HEADER ── */
     .site-header {
       text-align: center;
       padding: 72px 0 56px;
@@ -142,7 +139,6 @@
       font-weight: 300;
     }
 
-    /* ── FORM CARD ── */
     .form-card {
       background: linear-gradient(160deg, #F8F0DC 0%, #F2E8CC 50%, #EDE0BE 100%);
       border: 1px solid rgba(201,168,76,0.25);
@@ -170,7 +166,6 @@
       .form-card { padding: 36px 24px; }
     }
 
-    /* ── SECTION LABELS ── */
     .section-label {
       display: flex;
       align-items: center;
@@ -191,14 +186,9 @@
       background: var(--rule);
     }
 
-    .section-spacer {
-      margin-top: 44px;
-    }
+    .section-spacer { margin-top: 44px; }
 
-    /* ── FIELDS ── */
-    .field-group {
-      margin-bottom: 24px;
-    }
+    .field-group { margin-bottom: 24px; }
 
     .field-label {
       display: block;
@@ -272,17 +262,10 @@
       gap: 18px;
     }
 
-    .three-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 18px;
-    }
-
     @media (max-width: 560px) {
-      .two-col, .three-col { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
     }
 
-    /* ── QUESTION BLOCKS ── */
     .questions-intro {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -338,7 +321,30 @@
       padding-left: 38px;
     }
 
-    /* ── MUSIC SECTION ── */
+    .voice-memo-note {
+      margin-top: 44px;
+      padding: 20px 24px;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      background: rgba(253,250,243,0.4);
+      text-align: center;
+    }
+
+    .voice-memo-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--brown-mid);
+      line-height: 1.75;
+      opacity: 0.85;
+    }
+
+    .voice-memo-note strong {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--brown);
+    }
+
     .music-options {
       display: flex;
       flex-wrap: wrap;
@@ -382,7 +388,6 @@
       background: rgba(201,168,76,0.1);
     }
 
-    /* ── SUBMIT ── */
     .submit-section {
       margin-top: 48px;
       text-align: center;
@@ -432,7 +437,6 @@
     .submit-btn:active { transform: scale(0.98); }
     .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-    /* ── CONTACT LINE ── */
     .contact-line {
       margin-top: 20px;
       font-size: 0.82rem;
@@ -450,7 +454,6 @@
 
     .contact-line a:hover { border-color: var(--amber-deep); }
 
-    /* ── FOOTER ── */
     .site-footer {
       text-align: center;
       margin-top: 52px;
@@ -484,7 +487,6 @@
 
     .footer-links a:hover { color: var(--amber); }
 
-    /* ── CONFIRMATION ── */
     .confirmation {
       display: none;
       text-align: center;
@@ -534,7 +536,6 @@
 
     .req { color: var(--amber); margin-left: 2px; font-weight: 400; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -549,7 +550,6 @@
 
 <div class="page-wrap">
 
-  <!-- HEADER -->
   <header class="site-header">
     <svg class="wave-mark" width="200" height="28" viewBox="0 0 340 70" fill="none">
       <circle cx="14" cy="35" r="3.5" fill="#C9A84C" opacity="0.7"/>
@@ -563,25 +563,22 @@
 
     <div class="header-rule"><span></span></div>
 
+    <!-- EDIT 1: Simplified, grief-filtered opening instruction -->
     <p class="page-intro">
-      There is no right or wrong way to answer these questions.
-      Write as much or as little as feels natural.
-      Your words — even a single sentence — are enough to begin.
+      You don't have to write perfectly.<br>
+      Just answer like you're telling a friend about someone you love.
     </p>
   </header>
 
-  <!-- FORM CARD -->
   <div class="form-card" id="form-card">
 
     <form id="intake-form">
 
-      <!-- Web3Forms -->
       <input type="hidden" name="access_key" value="a4219cf2-dcb2-4d8b-b08e-66ef4f485b86">
       <input type="hidden" name="subject" value="MemoVivo: New Legacy Song Intake Submission">
       <input type="hidden" name="from_name" value="MemoVivo Legacy Intake">
       <input type="checkbox" name="botcheck" style="display:none;">
 
-      <!-- ABOUT THEIR LOVED ONE -->
       <div class="section-label">About Your Loved One</div>
 
       <div class="two-col">
@@ -600,7 +597,6 @@
         <input type="text" id="funeral-director" name="Funeral Director" placeholder="Director's name (helpful for larger funeral homes)">
       </div>
 
-      <!-- ABOUT YOU -->
       <div class="section-label section-spacer">About You</div>
 
       <div class="two-col">
@@ -626,8 +622,8 @@
         </div>
       </div>
 
-      <!-- THE SEVEN QUESTIONS -->
-      <div class="section-label section-spacer">Seven Questions</div>
+      <!-- EDIT 2: Section label updated to Eight Questions -->
+      <div class="section-label section-spacer">Eight Questions</div>
       <p class="questions-intro">Take your time. These answers become the song.</p>
 
       <div class="question-block">
@@ -635,65 +631,80 @@
           <span class="question-number">1</span>
           <span class="question-text">What did people call them?</span>
         </div>
-        <p class="question-guide">Their full name, a nickname, what the grandkids called them — whatever felt most like them.</p>
+        <p class="question-guide">Not just their name — what did family and close friends actually call them?</p>
         <textarea name="Q1 What did people call them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
       </div>
 
       <div class="question-block">
         <div class="question-header">
           <span class="question-number">2</span>
-          <span class="question-text">What did they love doing most?</span>
+          <span class="question-text">What would you always find them doing?</span>
         </div>
-        <p class="question-guide">Their passion, their hobby, the thing they could do for hours without noticing the time.</p>
-        <textarea name="Q2 What did they love doing most" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        <p class="question-guide">Think of a normal day. What were they doing? What did they have in their hands?</p>
+        <textarea name="Q2 What would you always find them doing" rows="3" placeholder="Write whatever comes to mind…"></textarea>
       </div>
 
       <div class="question-block">
         <div class="question-header">
           <span class="question-number">3</span>
-          <span class="question-text">Is there a place that felt most like them?</span>
+          <span class="question-text">Was there a place that felt most like them?</span>
         </div>
-        <p class="question-guide">A room, a yard, a town, a chair by the window — wherever they seemed most at home in the world.</p>
+        <p class="question-guide">A chair, a porch, a garden, a kitchen. The more specific, the better.</p>
         <textarea name="Q3 A place that felt most like them" rows="3" placeholder="Write whatever comes to mind…"></textarea>
       </div>
 
+      <!-- EDIT 3: New Q4 — relationship / people they loved -->
       <div class="question-block">
         <div class="question-header">
           <span class="question-number">4</span>
-          <span class="question-text">Was there a phrase everyone who loved them would recognize?</span>
+          <span class="question-text">Who did they love most?</span>
         </div>
-        <p class="question-guide">A saying, a word they always used, something they repeated so often it became part of who they were.</p>
-        <textarea name="Q4 A phrase everyone would recognize" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        <p class="question-guide">A spouse, a parent, a best friend, a child. If any of those people have already passed away, just mention it — it helps us honor them carefully in the song.</p>
+        <textarea name="Q4 Who did they love most" rows="3" placeholder="Write whatever comes to mind…"></textarea>
       </div>
 
       <div class="question-block">
         <div class="question-header">
           <span class="question-number">5</span>
-          <span class="question-text">Show me a moment when they were completely happy.</span>
+          <span class="question-text">Was there something they always said?</span>
         </div>
-        <p class="question-guide">Not a description — a moment. Where were they? Who was there? What were they doing?</p>
-        <textarea name="Q5 A moment when they were completely happy" rows="4" placeholder="Take your time with this one…"></textarea>
+        <p class="question-guide">A saying, a phrase, a word they used all the time — something people who loved them would recognize right away.</p>
+        <textarea name="Q5 Something they always said" rows="3" placeholder="Write whatever comes to mind…"></textarea>
       </div>
 
+      <!-- EDIT 4: Q6 upgraded with scene-coaching sub-prompt -->
       <div class="question-block">
         <div class="question-header">
           <span class="question-number">6</span>
-          <span class="question-text">What small ordinary thing did they always do?</span>
+          <span class="question-text">Show me a moment when they were completely happy.</span>
         </div>
-        <p class="question-guide">Something so routine nobody talked about it — but everybody knew. The coffee ritual, the way they said goodbye, the sound of them moving through the house.</p>
-        <textarea name="Q6 A small ordinary thing they always did" rows="3" placeholder="Write whatever comes to mind…"></textarea>
+        <p class="question-guide">Pick one moment. Where were they? Who was with them? Write it like you're watching it happen right now.</p>
+        <textarea name="Q6 A moment when they were completely happy" rows="5" placeholder="Take your time with this one…"></textarea>
       </div>
 
       <div class="question-block">
         <div class="question-header">
           <span class="question-number">7</span>
-          <span class="question-text">Because of them, what is different in your life?</span>
+          <span class="question-text">What small ordinary thing did they always do?</span>
         </div>
-        <p class="question-guide">Their lasting mark. What did they leave inside you that will still be there ten years from now?</p>
-        <textarea name="Q7 Because of them what is different in your life" rows="4" placeholder="There is no wrong answer here…"></textarea>
+        <p class="question-guide">Something so everyday nobody talked about it — but everybody knew.</p>
+        <textarea name="Q7 A small ordinary thing they always did" rows="3" placeholder="Write whatever comes to mind…"></textarea>
       </div>
 
-      <!-- MUSIC -->
+      <div class="question-block">
+        <div class="question-header">
+          <span class="question-number">8</span>
+          <span class="question-text">Because of them, what is different in your life?</span>
+        </div>
+        <p class="question-guide">What did they leave inside you? There is no wrong answer here.</p>
+        <textarea name="Q8 Because of them what is different in your life" rows="4" placeholder="There is no wrong answer here…"></textarea>
+      </div>
+
+      <!-- Voice memo alternative -->
+      <div class="voice-memo-note">
+        <p><strong>Prefer to talk instead of write?</strong> Record yourself on your phone answering these questions and send the audio to <a href="mailto:duane@memovivo.co" style="color: var(--amber-deep); text-decoration: none; border-bottom: 1px solid rgba(139,105,20,0.3);">duane@memovivo.co</a></p>
+      </div>
+
       <div class="section-label section-spacer">The Sound of the Song</div>
 
       <p class="field-hint" style="margin-bottom:18px;">If you could choose, what would this song feel like? Select any that feel right — or write your own below.</p>
@@ -720,7 +731,6 @@
         </div>
       </div>
 
-      <!-- SUBMIT -->
       <div class="submit-section">
         <p class="submit-note">
           Your responses go directly and securely to our songwriter.<br>
@@ -734,7 +744,6 @@
 
     </form>
 
-    <!-- CONFIRMATION -->
     <div class="confirmation" id="confirmation">
       <div class="confirmation-icon">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -747,9 +756,8 @@
       </p>
     </div>
 
-  </div><!-- /form-card -->
+  </div>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-brand">Memo<em>Vivo</em></div>
     <div class="footer-links">
@@ -759,7 +767,7 @@
     </div>
   </footer>
 
-</div><!-- /page-wrap -->
+</div>
 
 <script>
   const form = document.getElementById('intake-form');
@@ -790,14 +798,15 @@
       'Relationship':     document.getElementById('relationship').value.trim(),
       'Your Email':       document.getElementById('your-email').value.trim(),
       'Phone Number':     document.getElementById('your-phone').value.trim(),
-      'Q1 What did people call them':                    form.querySelector('[name="Q1 What did people call them"]').value.trim(),
-      'Q2 What did they love doing most':                form.querySelector('[name="Q2 What did they love doing most"]').value.trim(),
-      'Q3 A place that felt most like them':             form.querySelector('[name="Q3 A place that felt most like them"]').value.trim(),
-      'Q4 A phrase everyone would recognize':            form.querySelector('[name="Q4 A phrase everyone would recognize"]').value.trim(),
-      'Q5 A moment when they were completely happy':     form.querySelector('[name="Q5 A moment when they were completely happy"]').value.trim(),
-      'Q6 A small ordinary thing they always did':       form.querySelector('[name="Q6 A small ordinary thing they always did"]').value.trim(),
-      'Q7 Because of them what is different in your life': form.querySelector('[name="Q7 Because of them what is different in your life"]').value.trim(),
-      'Music Style':             checkedStyles || 'Not specified',
+      'Q1 What did people call them':                       form.querySelector('[name="Q1 What did people call them"]').value.trim(),
+      'Q2 What would you always find them doing':           form.querySelector('[name="Q2 What would you always find them doing"]').value.trim(),
+      'Q3 A place that felt most like them':                form.querySelector('[name="Q3 A place that felt most like them"]').value.trim(),
+      'Q4 Who did they love most':                          form.querySelector('[name="Q4 Who did they love most"]').value.trim(),
+      'Q5 Something they always said':                      form.querySelector('[name="Q5 Something they always said"]').value.trim(),
+      'Q6 A moment when they were completely happy':        form.querySelector('[name="Q6 A moment when they were completely happy"]').value.trim(),
+      'Q7 A small ordinary thing they always did':          form.querySelector('[name="Q7 A small ordinary thing they always did"]').value.trim(),
+      'Q8 Because of them what is different in your life':  form.querySelector('[name="Q8 Because of them what is different in your life"]').value.trim(),
+      'Music Style':              checkedStyles || 'Not specified',
       'Artist or Song Reference': document.getElementById('music-artist').value.trim(),
       'How song should feel':     document.getElementById('song-feel').value.trim()
     };
