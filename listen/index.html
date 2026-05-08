@@ -1,1 +1,305 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listen — MemoVivo</title>
+<meta name="description" content="Three tribute songs created from real family memories. Hear what MemoVivo makes possible for the families you serve.">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --slate-deep:#263238;--slate:#3A4A52;--surface:#2e3c44;--surface2:#354550;
+  --ink:#1C1C1A;--warm-white:#FAFAF7;--amber:#C08B3A;--amber-light:#D9A85C;
+  --amber-deep:#8A5F1E;--rule:rgba(255,255,255,0.07);--text:#FAFAF7;
+  --text-mid:rgba(250,250,247,0.6);--text-soft:rgba(250,250,247,0.35);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--slate-deep);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drawLine{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+.logo-mark path.wave{stroke-dasharray:600;stroke-dashoffset:600;animation:drawLine 1.8s 0.3s cubic-bezier(.4,0,.2,1) forwards;}
+.logo-mark circle.dot{opacity:0;animation:fadeUp 0.4s 1.8s ease forwards;}
+.logo-mark line.trail{stroke-dasharray:200;stroke-dashoffset:200;animation:drawLine 1s 1.5s ease forwards;}
+.page{position:relative;z-index:1;max-width:560px;margin:0 auto;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.8rem;border-bottom:0.5px solid var(--rule);background:rgba(26,34,40,0.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-wordmark{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:17px;letter-spacing:0.10em;color:var(--text);}
+.nav-tag{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(217,168,92,0.5);}
+.hero{padding:3rem 1.8rem 2.4rem;text-align:center;border-bottom:0.5px solid var(--rule);animation:fadeUp 0.7s 0.2s ease both;}
+.hero-eyebrow{font-size:9px;font-weight:400;letter-spacing:0.26em;text-transform:uppercase;color:var(--amber-light);opacity:0.65;margin-bottom:1rem;}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,6vw,36px);line-height:1.2;color:var(--text);margin-bottom:1rem;}
+.hero-h1 em{font-style:italic;font-weight:400;color:var(--amber-light);}
+.hero-sub{font-size:13px;font-weight:300;color:var(--text-mid);line-height:1.75;max-width:400px;margin:0 auto;}
+.amber-rule{width:36px;height:1.5px;background:var(--amber);margin:1.5rem auto 0;opacity:0.7;}
+.player-section{padding:2rem 1.5rem;animation:fadeUp 0.7s 0.4s ease both;}
+.section-eyebrow{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(217,168,92,0.5);text-align:center;margin-bottom:1.4rem;}
+.player-card{background:var(--surface);border:0.5px solid var(--rule);border-radius:10px;padding:1.5rem 1.4rem;}
+.player-controls{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.play-pause-btn{width:48px;height:48px;border-radius:50%;background:var(--amber);border:none;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s,transform 0.15s;}
+.play-pause-btn:hover{background:var(--amber-light);transform:scale(1.05);}
+.play-pause-btn:active{transform:scale(0.97);}
+.play-icon{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid var(--slate-deep);margin-left:3px;}
+.pause-icon{display:none;gap:4px;}
+.pause-icon span{display:block;width:4px;height:16px;background:var(--slate-deep);border-radius:2px;}
+.is-playing .play-icon{display:none;}
+.is-playing .pause-icon{display:flex;}
+.player-title{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:15px;color:var(--amber-light);margin-bottom:0.2rem;}
+.player-sub{font-size:11px;font-weight:300;color:var(--text-soft);}
+.waveform-wrap{position:relative;height:32px;margin-bottom:0.6rem;cursor:pointer;}
+.waveform-bars{display:flex;align-items:center;gap:2px;height:100%;}
+.wv{background:rgba(192,139,58,0.18);border-radius:2px;flex:1;transition:background 0.1s;}
+.wv.played{background:rgba(192,139,58,0.55);}
+.progress-wrap{display:flex;flex-direction:column;gap:0.35rem;margin-bottom:1rem;}
+.progress-track{height:2px;background:rgba(255,255,255,0.08);border-radius:2px;cursor:pointer;position:relative;}
+.progress-fill{height:100%;width:0%;background:var(--amber);border-radius:2px;transition:width 0.25s linear;pointer-events:none;}
+.progress-times{display:flex;justify-content:space-between;}
+.time-label{font-size:9px;color:var(--text-soft);letter-spacing:0.06em;font-variant-numeric:tabular-nums;}
+.tracklist{border-top:0.5px solid var(--rule);padding-top:1.1rem;display:flex;flex-direction:column;gap:0.75rem;}
+.track-row{display:flex;align-items:flex-start;gap:0.8rem;}
+.track-num{font-size:10px;font-weight:300;color:var(--amber);opacity:0.55;width:14px;flex-shrink:0;padding-top:1px;}
+.track-info{flex:1;}
+.track-name{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:500;color:var(--text);margin-bottom:0.1rem;}
+.track-tag{font-size:10px;font-weight:300;font-style:italic;color:var(--text-soft);}
+.track-duration{font-size:10px;color:var(--text-soft);flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums;}
+.divider{height:0.5px;background:var(--rule);margin:0 1.5rem;}
+.proof-section{padding:2rem 1.8rem;text-align:center;animation:fadeUp 0.7s 0.5s ease both;}
+.proof-q{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,3vw,18px);font-style:italic;font-weight:400;color:var(--text);line-height:1.65;max-width:380px;margin:0 auto 0.7rem;}
+.proof-attr{font-size:9px;letter-spacing:0.12em;color:var(--text-soft);}
+.form-section{background:rgba(26,34,40,0.8);border-top:0.5px solid var(--rule);padding:2.2rem 1.5rem 2.8rem;animation:fadeUp 0.7s 0.6s ease both;}
+.form-head{text-align:center;margin-bottom:1.8rem;}
+.form-h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(18px,4vw,24px);color:var(--text);margin-bottom:0.4rem;line-height:1.25;}
+.form-sub{font-size:11px;font-weight:300;color:var(--text-soft);line-height:1.65;}
+form{max-width:400px;margin:0 auto;}
+.field-wrap{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:0.9rem;}
+.field-label{font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(217,168,92,0.6);}
+.field-input{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.12);border-radius:5px;padding:0.65rem 0.9rem;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:var(--text);outline:none;width:100%;transition:border-color 0.2s;}
+.field-input:focus{border-color:rgba(192,139,58,0.5);}
+.field-input::placeholder{color:rgba(250,250,247,0.2);}
+.check-row{display:flex;align-items:flex-start;gap:0.7rem;margin-bottom:1.1rem;cursor:pointer;}
+.check-row input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:0.5px solid rgba(255,255,255,0.2);border-radius:3px;background:rgba(255,255,255,0.04);flex-shrink:0;margin-top:1px;cursor:pointer;position:relative;transition:border-color 0.2s,background 0.2s;}
+.check-row input[type="checkbox"]:checked{background:var(--amber);border-color:var(--amber);}
+.check-row input[type="checkbox"]:checked::after{content:'';position:absolute;left:4px;top:2px;width:5px;height:8px;border:2px solid var(--slate-deep);border-top:none;border-left:none;transform:rotate(45deg);}
+.check-text{font-size:12px;font-weight:300;color:var(--text-mid);line-height:1.55;}
+.hp{display:none !important;}
+.submit-btn{width:100%;background:var(--amber);border:none;border-radius:5px;padding:0.85rem;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;color:var(--slate-deep);cursor:pointer;letter-spacing:0.08em;transition:background 0.2s,transform 0.15s;margin-bottom:0.75rem;}
+.submit-btn:hover{background:var(--amber-light);}
+.submit-btn:active{transform:scale(0.99);}
+.submit-btn:disabled{opacity:0.55;cursor:not-allowed;}
+.or-row{text-align:center;font-size:10px;color:rgba(250,250,247,0.2);letter-spacing:0.1em;margin-bottom:0.75rem;}
+.call-btn{width:100%;background:transparent;border:0.5px solid rgba(192,139,58,0.3);border-radius:5px;padding:0.85rem;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:var(--amber-light);cursor:pointer;letter-spacing:0.04em;transition:border-color 0.2s,color 0.2s;text-decoration:none;display:block;text-align:center;}
+.call-btn:hover{border-color:rgba(192,139,58,0.6);}
+.form-success{display:none;text-align:center;padding:1.5rem 0;}
+.form-success.visible{display:block;}
+.success-icon{width:44px;height:44px;border-radius:50%;background:rgba(192,139,58,0.15);border:0.5px solid rgba(192,139,58,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+.success-icon svg{width:20px;height:20px;}
+.success-h{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:0.4rem;}
+.success-p{font-size:12px;font-weight:300;color:var(--text-mid);line-height:1.65;}
+footer{padding:1.2rem 1.8rem;border-top:0.5px solid var(--rule);display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.footer-wordmark{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:13px;letter-spacing:0.10em;color:rgba(250,250,247,0.3);}
+.footer-right{text-align:right;}
+.footer-tagline{display:block;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,247,0.15);margin-bottom:2px;}
+.footer-url{font-size:9px;letter-spacing:0.08em;color:rgba(192,139,58,0.3);}
+@media(max-width:480px){nav{padding:1rem 1.2rem;}.hero{padding:2.2rem 1.2rem 2rem;}.player-section{padding:1.6rem 1.2rem;}.proof-section{padding:1.6rem 1.2rem;}.form-section{padding:1.8rem 1.2rem 2.4rem;}footer{padding:1rem 1.2rem;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<nav>
+  <a href="https://memovivo.co" class="nav-logo" aria-label="MemoVivo home">
+    <svg class="logo-mark" width="80" height="14" viewBox="0 0 340 70" fill="none" aria-hidden="true">
+      <circle class="dot" cx="14" cy="35" r="4" fill="#C08B3A"/>
+      <path class="wave" d="M18 35 C24 35,27 22,32 14 C37 6,41 6,44 14 C47 22,49 46,53 54 C57 62,61 62,64 54 C67 46,68 20,73 11 C78 2,83 2,87 11 C91 20,93 50,98 58 C103 66,107 64,111 56 C115 48,116 26,121 19 C126 12,130 13,133 20 C136 27,137 46,141 52 C145 58,148 57,151 51 C154 45,155 32,159 27 C163 22,166 23,168 28 C170 33,171 42,174 46 C177 50,179 49,181 45 C183 41,184 34,186 31 C188 28,190 29,191 32 C192 35,192 39,194 41 C196 43,197 42,198 40" stroke="#C08B3A" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line class="trail" x1="200" y1="40" x2="290" y2="40" stroke="#C08B3A" stroke-width="1.2" stroke-linecap="round" opacity=".4"/>
+    </svg>
+    <span class="nav-wordmark">MemoVivo</span>
+  </a>
+  <span class="nav-tag">For funeral home directors</span>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">A new kind of memorial keepsake</p>
+  <h1 class="hero-h1">Your families have a story.<br>Help them <em>tell it.</em></h1>
+  <p class="hero-sub">These songs were created from real family memories — their words, their stories, their people. This is what MemoVivo makes possible.</p>
+  <div class="amber-rule"></div>
+</section>
+
+<section class="player-section" aria-label="Demo audio player">
+  <p class="section-eyebrow">Three tribute songs — listen for yourself</p>
+  <div class="player-card">
+    <div class="player-controls">
+      <button class="play-pause-btn" id="playBtn" aria-label="Play demo">
+        <span class="play-icon" aria-hidden="true"></span>
+        <span class="pause-icon" aria-hidden="true"><span></span><span></span></span>
+      </button>
+      <div class="player-title-block">
+        <div class="player-title">MemoVivo Demo — Three Tribute Songs</div>
+        <div class="player-sub" id="nowPlaying">Three families. Three stories. About 4 minutes total.</div>
+      </div>
+    </div>
+    <div class="waveform-wrap" id="waveformWrap" role="presentation" aria-hidden="true">
+      <div class="waveform-bars" id="waveformBars"></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-track" id="progressTrack" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-times">
+        <span class="time-label" id="timeElapsed">0:00</span>
+        <span class="time-label" id="timeDuration">—</span>
+      </div>
+    </div>
+    <div class="tracklist" role="list" aria-label="Songs in this demo">
+      <div class="track-row" role="listitem">
+        <span class="track-num" aria-hidden="true">01</span>
+        <div class="track-info">
+          <div class="track-name">Always Sisters</div>
+          <div class="track-tag">Two sisters. One bed. A line down the middle.</div>
+        </div>
+        <span class="track-duration" id="dur1">—</span>
+      </div>
+      <div class="track-row" role="listitem">
+        <span class="track-num" aria-hidden="true">02</span>
+        <div class="track-info">
+          <div class="track-name">She Was a Preacher's Daughter</div>
+          <div class="track-tag">White shoes on the windowsill. Sunday dinner on the stove.</div>
+        </div>
+        <span class="track-duration" id="dur2">—</span>
+      </div>
+      <div class="track-row" role="listitem">
+        <span class="track-num" aria-hidden="true">03</span>
+        <div class="track-info">
+          <div class="track-name">We Are Who We Are Because of You</div>
+          <div class="track-tag">A cast iron skillet. A stampede on the stairs.</div>
+        </div>
+        <span class="track-duration" id="dur3">—</span>
+      </div>
+    </div>
+  </div>
+  <audio id="demoAudio" preload="metadata">
+    <source src="/assets/audio/memovivo-demo.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</section>
+
+<div class="divider"></div>
+
+<section class="proof-section">
+  <p class="proof-q">"She kept saying she didn't know how to put it into words. This gave her a way."</p>
+  <p class="proof-attr">— Family member, memorial service</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="form-section" aria-label="Contact form">
+  <div class="form-head">
+    <h2 class="form-h2">Want to offer this to your families?</h2>
+    <p class="form-sub">Leave your information and we'll follow up within one business day.</p>
+  </div>
+  <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+    <input type="hidden" name="access_key" value="527accef-053a-4a3b-ae04-a98a7f6d1671">
+    <input type="hidden" name="subject" value="MemoVivo Director Inquiry">
+    <input type="hidden" name="from_name" value="MemoVivo Listen Page">
+    <input type="hidden" name="redirect" value="false">
+    <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+    <div class="field-wrap">
+      <label class="field-label" for="directorName">Your name</label>
+      <input class="field-input" type="text" id="directorName" name="name" placeholder="Director's name" required autocomplete="name">
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="funeralHome">Funeral home</label>
+      <input class="field-input" type="text" id="funeralHome" name="funeral_home" placeholder="Funeral home name" required>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="emailAddr">Email address</label>
+      <input class="field-input" type="email" id="emailAddr" name="email" placeholder="email@funeralhome.com" required autocomplete="email">
+    </div>
+    <label class="check-row">
+      <input type="checkbox" name="wants_demo_call" value="Yes">
+      <span class="check-text">I'd like to schedule a 15-minute call to see how MemoVivo works with my families.</span>
+    </label>
+    <button type="submit" class="submit-btn" id="submitBtn">Send my information</button>
+  </form>
+  <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C08B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <p class="success-h">Thank you.</p>
+    <p class="success-p">We'll be in touch within one business day.<br>In the meantime, feel free to listen again.</p>
+  </div>
+  <div class="or-row" id="orRow">— or —</div>
+  <a href="https://calendly.com/memovivo" class="call-btn" id="callBtn" target="_blank" rel="noopener noreferrer">Schedule a call directly</a>
+</section>
+
+<footer>
+  <a href="https://memovivo.co" class="footer-logo" aria-label="MemoVivo home">
+    <svg width="28" height="6" viewBox="0 0 340 70" fill="none" aria-hidden="true">
+      <circle cx="14" cy="35" r="5" fill="#C08B3A" opacity="0.35"/>
+      <path d="M18 35 C24 35,27 22,32 14 C37 6,41 6,44 14 C47 22,49 46,53 54 C57 62,61 62,64 54 C67 46,68 20,73 11 C78 2,83 2,87 11 C91 20,93 50,98 58 C103 66,107 64,111 56 C115 48,116 26,121 19 C126 12,130 13,133 20 C136 27,137 46,141 52 C145 58,148 57,151 51 C154 45,155 32,159 27 C163 22,166 23,168 28 C170 33,171 42,174 46 C177 50,179 49,181 45 C183 41,184 34,186 31 C188 28,190 29,191 32 C192 35,192 39,194 41 C196 43,197 42,198 40" stroke="#C08B3A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+    </svg>
+    <span class="footer-wordmark">MemoVivo</span>
+  </a>
+  <div class="footer-right">
+    <span class="footer-tagline">Every life deserves a song.</span>
+    <span class="footer-url">memovivo.co</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function buildWaveform(){
+  var h=[8,14,20,12,24,16,10,22,18,8,20,24,14,18,22,10,16,20,12,24,18,10,22,16,8,20,14,24,18,12];
+  var w=document.getElementById('waveformBars');
+  h.forEach(function(v){var d=document.createElement('div');d.className='wv';d.style.height=v+'px';w.appendChild(d);});
+})();
+
+(function initPlayer(){
+  var audio=document.getElementById('demoAudio');
+  var playBtn=document.getElementById('playBtn');
+  var progressFill=document.getElementById('progressFill');
+  var progressTrack=document.getElementById('progressTrack');
+  var timeElapsed=document.getElementById('timeElapsed');
+  var timeDuration=document.getElementById('timeDuration');
+  var bars=document.querySelectorAll('.wv');
+  function fmt(s){if(isNaN(s))return'—';var m=Math.floor(s/60);var sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}
+  audio.addEventListener('loadedmetadata',function(){timeDuration.textContent=fmt(audio.duration);});
+  playBtn.addEventListener('click',function(){if(audio.paused){audio.play().catch(function(e){console.warn('Audio play failed:',e);});}else{audio.pause();}});
+  audio.addEventListener('play',function(){playBtn.classList.add('is-playing');playBtn.setAttribute('aria-label','Pause');});
+  audio.addEventListener('pause',function(){playBtn.classList.remove('is-playing');playBtn.setAttribute('aria-label','Play');});
+  audio.addEventListener('ended',function(){playBtn.classList.remove('is-playing');playBtn.setAttribute('aria-label','Play');progressFill.style.width='0%';timeElapsed.textContent='0:00';});
+  audio.addEventListener('timeupdate',function(){if(!audio.duration)return;var pct=(audio.currentTime/audio.duration)*100;progressFill.style.width=pct+'%';progressTrack.setAttribute('aria-valuenow',Math.round(pct));timeElapsed.textContent=fmt(audio.currentTime);var lit=Math.round((pct/100)*bars.length);bars.forEach(function(b,i){b.classList.toggle('played',i<lit);});});
+  progressTrack.addEventListener('click',function(e){var rect=progressTrack.getBoundingClientRect();var pct=(e.clientX-rect.left)/rect.width;if(audio.duration)audio.currentTime=pct*audio.duration;});
+  progressTrack.addEventListener('keydown',function(e){if(!audio.duration)return;if(e.key==='ArrowRight')audio.currentTime=Math.min(audio.duration,audio.currentTime+5);if(e.key==='ArrowLeft')audio.currentTime=Math.max(0,audio.currentTime-5);});
+})();
+
+(function initForm(){
+  var form=document.getElementById('contactForm');
+  var submitBtn=document.getElementById('submitBtn');
+  var formSuccess=document.getElementById('formSuccess');
+  var orRow=document.getElementById('orRow');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=form.querySelector('#directorName').value.trim();
+    var home=form.querySelector('#funeralHome').value.trim();
+    var email=form.querySelector('#emailAddr').value.trim();
+    if(!name||!home||!email){alert('Please fill in your name, funeral home, and email address.');return;}
+    submitBtn.disabled=true;submitBtn.textContent='Sending…';
+    fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)})
+      .then(function(res){return res.json();})
+      .then(function(json){
+        if(json.success){form.style.display='none';orRow.style.display='none';formSuccess.classList.add('visible');}
+        else{submitBtn.disabled=false;submitBtn.textContent='Send my information';alert('Something went wrong. Please try again.');}
+      })
+      .catch(function(){submitBtn.disabled=false;submitBtn.textContent='Send my information';alert('Something went wrong. Please check your connection and try again.');});
+  });
+})();
+</script>
+</body>
+</html>
