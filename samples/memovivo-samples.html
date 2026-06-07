@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MemoVivo — Hear a Legacy Song</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy:  #1B2B5A;
+      --gold:  #C4963B;
+      --gold-light: #E8C97A;
+      --cream: #FAF6EE;
+      --paper: #F5F0E8;
+      --text:  #1C1C1A;
+      --muted: #6B6358;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── HEADER ── */
+    header {
+      width: 100%;
+      background-color: var(--navy);
+      padding: 2rem 1.5rem 1.75rem;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .logo-music-note {
+      font-size: 1.6rem;
+      color: var(--gold-light);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 500;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .brand-tagline {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #c8c0b0;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      max-width: 520px;
+      width: 100%;
+      padding: 2.25rem 1.75rem 1.25rem;
+      text-align: center;
+    }
+
+    .intro-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 0.9rem;
+    }
+
+    .intro-body {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 520px;
+      width: 100%;
+      padding: 0 1.75rem;
+      margin: 1rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--gold);
+      opacity: 0.4;
+    }
+
+    .divider-icon {
+      font-size: 1rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* ── SONG CARDS ── */
+    .songs {
+      max-width: 520px;
+      width: 100%;
+      padding: 0 1.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .song-card {
+      background: #fff;
+      border: 1px solid #e2d9c8;
+      border-radius: 6px;
+      padding: 1.4rem 1.5rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(27, 43, 90, 0.06);
+    }
+
+    .song-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .song-description {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    /* ── CUSTOM AUDIO PLAYER ── */
+    .player-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--navy);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background-color 0.2s;
+    }
+
+    .play-btn:hover {
+      background-color: #263e7a;
+    }
+
+    .play-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--gold-light);
+      margin-left: 2px; /* optical center for play triangle */
+    }
+
+    .play-btn.playing svg.icon-play { display: none; }
+    .play-btn:not(.playing) svg.icon-pause { display: none; }
+
+    .progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 4px;
+      background: #e2d9c8;
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--navy), var(--gold));
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
+
+    .time-display {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      max-width: 520px;
+      width: 100%;
+      padding: 0.5rem 1.75rem 3rem;
+      text-align: center;
+    }
+
+    .cta-box {
+      background-color: var(--navy);
+      border-radius: 6px;
+      padding: 2rem 1.75rem;
+      border: 1px solid rgba(196, 150, 59, 0.35);
+    }
+
+    .cta-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--gold-light);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #c8c0b0;
+    }
+
+    .cta-body strong {
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      width: 100%;
+      background-color: var(--navy);
+      border-top: 1px solid rgba(196, 150, 59, 0.3);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-site {
+      font-size: 0.78rem;
+      color: #9a9080;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-site a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <span class="logo-music-note">♩</span>
+    <div class="brand-name">MemoVivo</div>
+    <div class="brand-tagline">Memories Living in Song</div>
+  </header>
+
+  <!-- ── INTRO ── -->
+  <div class="intro">
+    <h1 class="intro-heading">Hear what a Legacy Song sounds like.</h1>
+    <p class="intro-body">
+      Each song below was built from real family memories —
+      stories only they could tell.
+      Take your time and listen.
+    </p>
+  </div>
+
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <!-- ── SONG CARDS ── -->
+  <div class="songs">
+
+    <!-- SONG 1 -->
+    <!-- To update: change the label, description, and src in the <audio> tag below -->
+    <div class="song-card">
+      <div class="song-label">Sample Song — Style One</div>
+      <div class="song-description">A gentle, heartfelt tribute</div>
+      <div class="player-wrap">
+        <audio id="audio1" preload="metadata">
+          <source src="song1.mp3" type="audio/mpeg">
+        </audio>
+        <div class="player-controls">
+          <button class="play-btn" id="btn1" onclick="togglePlay('audio1','btn1','fill1','time1')" aria-label="Play or pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+          </button>
+          <div class="progress-wrap">
+            <div class="progress-bar-track" onclick="seek(event,'audio1','fill1')" id="track1">
+              <div class="progress-bar-fill" id="fill1"></div>
+            </div>
+            <div class="time-display" id="time1">0:00 / 0:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SONG 2 -->
+    <div class="song-card">
+      <div class="song-label">Sample Song — Style Two</div>
+      <div class="song-description">A warm celebration of a life well lived</div>
+      <div class="player-wrap">
+        <audio id="audio2" preload="metadata">
+          <source src="song2.mp3" type="audio/mpeg">
+        </audio>
+        <div class="player-controls">
+          <button class="play-btn" id="btn2" onclick="togglePlay('audio2','btn2','fill2','time2')" aria-label="Play or pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+          </button>
+          <div class="progress-wrap">
+            <div class="progress-bar-track" onclick="seek(event,'audio2','fill2')" id="track2">
+              <div class="progress-bar-fill" id="fill2"></div>
+            </div>
+            <div class="time-display" id="time2">0:00 / 0:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SONG 3 -->
+    <div class="song-card">
+      <div class="song-label">Sample Song — Style Three</div>
+      <div class="song-description">Rich with the stories only family knows</div>
+      <div class="player-wrap">
+        <audio id="audio3" preload="metadata">
+          <source src="song3.mp3" type="audio/mpeg">
+        </audio>
+        <div class="player-controls">
+          <button class="play-btn" id="btn3" onclick="togglePlay('audio3','btn3','fill3','time3')" aria-label="Play or pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+          </button>
+          <div class="progress-wrap">
+            <div class="progress-bar-track" onclick="seek(event,'audio3','fill3')" id="track3">
+              <div class="progress-bar-fill" id="fill3"></div>
+            </div>
+            <div class="time-display" id="time3">0:00 / 0:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-section">
+    <div class="cta-box">
+      <div class="cta-heading">A song built from your memories of them.</div>
+      <p class="cta-body">
+        Eight questions. One original song.
+        Delivered within 24 hours.<br><br>
+        <strong>Ask your funeral director</strong> about creating
+        a Legacy Song for your loved one.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p class="footer-site"><a href="https://memovivo.co">memovivo.co</a></p>
+  </footer>
+
+  <!-- ── AUDIO PLAYER LOGIC ── -->
+  <script>
+    const audios = {};
+
+    function fmt(sec) {
+      if (isNaN(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return m + ':' + s;
+    }
+
+    function updateTime(audioId, fillId, timeId) {
+      const a = document.getElementById(audioId);
+      const fill = document.getElementById(fillId);
+      const time = document.getElementById(timeId);
+      const pct = a.duration ? (a.currentTime / a.duration) * 100 : 0;
+      fill.style.width = pct + '%';
+      time.textContent = fmt(a.currentTime) + ' / ' + fmt(a.duration);
+    }
+
+    function togglePlay(audioId, btnId, fillId, timeId) {
+      const a = document.getElementById(audioId);
+      const btn = document.getElementById(btnId);
+
+      // Pause any other playing audio
+      document.querySelectorAll('audio').forEach(el => {
+        if (el.id !== audioId && !el.paused) {
+          el.pause();
+          const otherBtn = document.getElementById(el.id.replace('audio', 'btn'));
+          if (otherBtn) otherBtn.classList.remove('playing');
+        }
+      });
+
+      if (a.paused) {
+        a.play();
+        btn.classList.add('playing');
+        a.ontimeupdate = () => updateTime(audioId, fillId, timeId);
+        a.onended = () => {
+          btn.classList.remove('playing');
+          document.getElementById(fillId).style.width = '0%';
+          document.getElementById(timeId).textContent = '0:00 / ' + fmt(a.duration);
+        };
+        a.onloadedmetadata = () => updateTime(audioId, fillId, timeId);
+      } else {
+        a.pause();
+        btn.classList.remove('playing');
+      }
+    }
+
+    function seek(event, audioId, fillId) {
+      const a = document.getElementById(audioId);
+      if (!a.duration) return;
+      const track = event.currentTarget;
+      const rect = track.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      a.currentTime = pct * a.duration;
+      document.getElementById(fillId).style.width = (pct * 100) + '%';
+    }
+
+    // Load duration on metadata ready
+    ['audio1','audio2','audio3'].forEach((id, i) => {
+      const a = document.getElementById(id);
+      const n = i + 1;
+      a.onloadedmetadata = () => {
+        document.getElementById('time' + n).textContent = '0:00 / ' + fmt(a.duration);
+      };
+    });
+  </script>
+
+</body>
+</html>
