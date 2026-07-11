@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    body {background-color: #f9f6f2}
+    p.p1 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #151514; -webkit-text-stroke: #151514; min-height: 14.0px}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 13.0px Courier; font-kerning: none}
+    span.s3 {-webkit-text-stroke: 0px #000000}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Here's the full plan, written so you can hand the actual clicking to Claude in Chrome. First, do one thing yourself before opening the extension: <b>download </b></span><span class="s2"><b>eitnlr_song_finder_v2.html</b></span><span class="s1"><b> from our chat to your computer</b> (Downloads folder is fine), because the extension will need the file on your machine to upload it to GitHub.</span></p>
+<p class="p1"><span class="s1"><b>The overall plan</b><b></b></span></p>
+<ol class="ol1">
+  <li class="li2"><span class="s3"></span><span class="s1">Find the GitHub repo that holds the memovivo.co site code</span></li>
+  <li class="li2"><span class="s3"></span><span class="s1">Add the file to the repo as </span><span class="s2">find/index.html</span><span class="s1"> (this makes the URL </span><span class="s2">memovivo.co/find</span><span class="s1"> — clean, permanent, no version number)</span></li>
+  <li class="li2"><span class="s3"></span><span class="s1">Commit to the main branch</span></li>
+  <li class="li2"><span class="s3"></span><span class="s1">Cloudflare Pages sees the commit and auto-deploys — usually live in under two minutes</span></li>
+  <li class="li2"><span class="s3"></span><span class="s1">Verify by visiting </span><span class="s2">memovivo.co/find</span><span class="s1"> and clicking through one full path</span></li>
+</ol>
+<p class="p1"><span class="s1"><b>Step-by-step prompts for the Claude extension</b><b></b></span></p>
+<p class="p1"><span class="s1"><i>Step 1 — Identify the repo and structure.</i> Open github.com, log in, then tell the extension:</span></p>
+<blockquote style="margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000"><span class="s1">"Go to my GitHub repositories list and help me find the repo that contains the memovivo.co website. Once we find it, open it and tell me how it's structured — specifically whether the site files (like the eitn page) live in the repo root or inside a subfolder like 'public', 'site', or 'dist'. Don't change anything yet."</span></blockquote>
+<p class="p1"><span class="s1">This matters because if your /eitn page lives at, say, </span><span class="s2">public/eitn/index.html</span><span class="s1">, then the new file needs to go to </span><span class="s2">public/find/index.html</span><span class="s1"> — matching the existing pattern. The extension can confirm this by finding where the eitn page's file sits.</span></p>
+<p class="p1"><span class="s1"><i>Step 2 — Upload the file.</i> Once the location is confirmed:</span></p>
+<blockquote style="margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000"><span class="s1">"Navigate into [the correct folder] in this repo. Use the 'Add file' → 'Upload files' option. I'll drag in the file eitnlr_song_finder_v2.html from my Downloads folder — but before committing, I need it placed inside a new folder called 'find' and renamed to 'index.html'. If the upload interface won't let us rename or create a folder, use 'Add file' → 'Create new file' instead, type 'find/index.html' as the filename (GitHub creates the folder automatically when you type the slash), and I'll paste the file contents in. Commit directly to the main branch with the message 'Add family song finder tool'."</span></blockquote>
+<p class="p1"><span class="s1">The "Create new file" fallback is the reliable path — GitHub's upload tool can't rename or create folders, but the create-new-file box makes the folder the moment you type </span><span class="s2">find/</span><span class="s1"> in the name. If pasting is needed, open the downloaded HTML file in Notepad (right-click → Open with → Notepad), Select All, Copy, and paste into GitHub's editor.</span></p>
+<p class="p1"><span class="s1"><i>Step 3 — Watch the deploy.</i> Then:</span></p>
+<blockquote style="margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000"><span class="s1">"Go to my Cloudflare dashboard, open the Pages project for memovivo.co, and check the Deployments tab. Confirm a new deployment triggered from the commit we just made and tell me when it shows as successful."</span></blockquote>
+<p class="p1"><span class="s1"><i>Step 4 — Verify live.</i> Finally:</span></p>
+<blockquote style="margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000"><span class="s1">"Go to memovivo.co/find and confirm the page loads. Click through one complete path — choose 'A spouse or partner', then 'Just tell the truth about losing them', then any option — and confirm a result screen appears with song titles and their italic subtitles."</span></blockquote>
+<p class="p1"><span class="s1"><b>Two things that might come up</b><b></b></span></p>
+<ul class="ul1">
+  <li class="li2"><span class="s3"><b></b></span><span class="s1"><b>If the repo uses a build system</b> (you'll know because the repo has files like </span><span class="s2">package.json</span><span class="s1"> or a </span><span class="s2">src</span><span class="s1"> folder rather than plain HTML sitting where the eitn page should be), the file may need to go into a specific static-assets folder instead. If Step 1 reveals that, tell me what the extension found and I'll give you the exact placement — don't guess, because a wrong placement just silently won't appear on the site.</span></li>
+  <li class="li2"><span class="s3"><b></b></span><span class="s1"><b>Cloudflare permission prompts</b> — the extension will ask your approval before committing or clicking anything consequential. That's expected; approve the commit when it shows you what it's about to do.</span></li>
+</ul>
+<p class="p1"><span class="s1">Once it's live, the last piece of housekeeping is deciding whether </span><span class="s2">/find</span><span class="s1"> gets linked from your homepage or stays an unlisted URL you share only with directors — the discoverability question we talked about. That's a one-line decision you can make later; publishing it doesn't force the choice.</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+</body>
+</html>
