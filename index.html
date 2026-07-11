@@ -368,7 +368,7 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
 
 <section class="founder" id="founder">
   <div class="founder-inner">
-    <img class="founder-photo reveal" src="/duane.jpg" alt="Duane Fernandez, founder of MemoVivo" onerror="this.style.display='none'">
+    <img class="founder-photo reveal" src="/duane.jpg" alt="Duane Fernandez, founder of MemoVivo" onerror="this.remove(); var fi=document.querySelector('.founder-inner'); fi.style.gridTemplateColumns='1fr'; fi.style.maxWidth='640px';">
     <div class="reveal">
       <div class="founder-kicker">From the Founder</div>
       <h2>The songs began <em>in a circle of chairs.</em></h2>
