@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Even in the Night, Love Remains — Find Your Way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1A;
+    --sage:#6B8C72;
+    --gold:#B89A68;
+    --stone:#9E9185;
+    --paper:#FAF8F5;
+    --cream:#F5F0E8;
+    --serif:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans:'Jost', 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:44px 22px;
+  }
+  .card{ width:100%; max-width:700px; }
+  .eyebrow{
+    text-align:center;
+    font-size:13px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-bottom:18px;
+  }
+  .flourish{
+    display:flex; align-items:center; justify-content:center;
+    gap:14px; margin:0 0 32px 0; color:var(--gold);
+  }
+  .flourish .line{ height:1px; width:64px; background:var(--stone); opacity:0.4; }
+  .flourish .mark{ font-size:14px; color:var(--gold); }
+  h1.title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(30px,5vw,42px);
+    text-align:center; line-height:1.25;
+    margin:0 0 14px 0;
+  }
+  p.lede{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:20px;
+    text-align:center;
+    color:var(--stone);
+    line-height:1.6;
+    margin:0 0 40px 0;
+  }
+  .question{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(26px,4.4vw,32px);
+    text-align:center; line-height:1.3;
+    margin:0 0 34px 0;
+  }
+  .options{ display:flex; flex-direction:column; gap:14px; }
+  .option{
+    display:block; width:100%; text-align:left;
+    background:var(--cream);
+    border:1px solid rgba(158,145,133,0.35);
+    border-left:4px solid transparent;
+    border-radius:6px;
+    padding:20px 24px;
+    font-family:var(--sans);
+    font-size:19px;
+    line-height:1.45;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color 0.25s ease, background 0.25s ease, transform 0.15s ease;
+    min-height:66px;
+  }
+  .option:hover{ border-left-color:var(--sage); background:#f0ece3; }
+  .option:active{ transform:scale(0.995); }
+  .option:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .option.quiet{
+    background:transparent;
+    border-style:dashed;
+    color:var(--stone);
+    font-size:17px;
+  }
+  .option.quiet:hover{ color:var(--ink); border-left-color:var(--stone); background:var(--cream); }
+
+  .nav-row{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:26px; min-height:22px;
+  }
+  .nav-link{
+    background:none; border:none;
+    color:var(--stone);
+    font-family:var(--sans); font-size:15px; letter-spacing:0.04em;
+    cursor:pointer; padding:8px 4px;
+    text-decoration:underline; text-decoration-color:transparent;
+    transition:text-decoration-color 0.2s ease, color 0.2s ease;
+  }
+  .nav-link:hover{ color:var(--ink); text-decoration-color:var(--stone); }
+  .nav-link:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .nav-link.invisible{ visibility:hidden; }
+
+  .progress{ display:flex; justify-content:center; gap:8px; margin-bottom:30px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:rgba(158,145,133,0.35); }
+  .dot.active{ background:var(--gold); }
+
+  .start-btn{
+    display:block; margin:0 auto;
+    background:var(--ink); color:var(--paper);
+    font-family:var(--sans); font-size:17px; letter-spacing:0.04em;
+    border:none; border-radius:4px;
+    padding:18px 42px; cursor:pointer;
+    transition:background 0.25s ease;
+  }
+  .start-btn:hover{ background:var(--sage); }
+  .start-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* Interstitial */
+  .beat{
+    text-align:center;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:24px;
+    color:var(--stone);
+    line-height:1.6;
+    padding:60px 0;
+  }
+
+  /* Result screen */
+  .result-numeral{
+    font-family:var(--serif);
+    font-size:15px; letter-spacing:0.16em;
+    color:var(--gold); text-transform:uppercase;
+    text-align:center;
+  }
+  .result-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(28px,4.6vw,36px);
+    text-align:center;
+    margin:4px 0 10px 0;
+  }
+  .result-instruction{
+    text-align:center; font-size:16px; color:var(--stone);
+    margin-bottom:28px; letter-spacing:0.02em; line-height:1.5;
+  }
+  .songs{ display:flex; flex-direction:column; gap:12px; margin-bottom:26px; }
+  .song-card{
+    background:var(--cream); border-radius:6px; padding:20px 26px;
+  }
+  .song-card.primary{ border-left:4px solid var(--sage); }
+  .song-card.alt{ border-left:4px solid rgba(158,145,133,0.45); }
+  .song-card .label{
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--stone); margin-bottom:5px;
+  }
+  .song-card .name{
+    font-family:var(--serif);
+    font-size:23px; font-weight:500; color:var(--ink);
+    margin-bottom:4px;
+  }
+  .song-card .sub{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:16.5px;
+    color:var(--stone);
+    line-height:1.5;
+  }
+  .secondary-note{
+    background:transparent;
+    border:1px dashed rgba(158,145,133,0.5);
+    border-radius:6px;
+    padding:18px 24px;
+    margin-bottom:28px;
+    font-size:16px;
+    color:var(--stone);
+    line-height:1.55;
+    text-align:center;
+  }
+  .secondary-note b{ color:var(--ink); font-weight:500; }
+  .closing-line{
+    text-align:center;
+    font-family:var(--serif); font-style:italic;
+    font-size:18px; color:var(--stone);
+    margin-bottom:32px; line-height:1.6;
+  }
+  .restart-row{ text-align:center; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .ghost-btn{
+    background:none; border:1px solid var(--stone);
+    color:var(--ink);
+    font-family:var(--sans); font-size:15px; letter-spacing:0.04em;
+    border-radius:4px; padding:14px 28px; cursor:pointer;
+    transition:border-color 0.25s ease, background 0.25s ease;
+  }
+  .ghost-btn:hover{ border-color:var(--sage); background:var(--cream); }
+  .ghost-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+  /* Browse screen */
+  .browse-list{ display:flex; flex-direction:column; gap:10px; margin-bottom:30px; }
+  .browse-item{
+    background:var(--cream);
+    border-left:3px solid rgba(158,145,133,0.4);
+    border-radius:5px;
+    padding:16px 22px;
+  }
+  .browse-item .name{
+    font-family:var(--serif); font-size:21px; font-weight:500;
+  }
+  .browse-item .sub{
+    font-family:var(--serif); font-style:italic;
+    font-size:15.5px; color:var(--stone); line-height:1.5;
+    margin-top:2px;
+  }
+
+  .fade-in{ animation:fadeIn 0.4s ease both; }
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(6px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fade-in{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="card" id="app"></div>
+</div>
+
+<script>
+/* =========================================================
+   SONG DATA — every song in all ten volumes, with the
+   subtitle language from the printed books.
+   ========================================================= */
+
+const SONGS = {
+  // Volume I — Poems & Readings
+  "Love Still Leads Us On": "For lifting eyes toward the love that continues beyond grief",
+  "You Are in the Morning": "For finding the presence of the one you lost in the natural world around you",
+  "Just Beyond This Room": "For the reassurance that love does not end at the closing door",
+  "When You Remember Me": "For permission to remember with both tears and gratitude",
+  "Beyond the Horizon": "For trusting that what is out of sight is not out of love",
+  "Safe Across the Water": "For a peaceful farewell and the comfort of a dignified passing",
+  "Carry the Light": "For honoring the courage of someone who faced their final days with grace",
+  "The Roads You Gave Us": "For celebrating the life example and legacy left behind",
+  "All the Love Remains": "For sitting honestly with grief while holding the love that stays",
+  "Do Not Stand in Sorrow": "For the gentle release — a blessing from the one who is gone to the ones who remain",
+
+  // Volume II — Scripture
+  "Shepherd Through the Valley": "Inspired by Psalm 23",
+  "A Place Prepared": "Inspired by John 14:1–3",
+  "Still Held in Love": "Inspired by Romans 8:31–39",
+  "The Life That Cannot Die": "Inspired by John 11:17–27",
+  "When the Trumpet Sounds": "Inspired by 1 Corinthians 15:51–57",
+  "We Will Always Be with the Lord": "Inspired by 1 Thessalonians 4:13–18",
+  "For Every Season": "Inspired by Ecclesiastes 3:1–8",
+  "My Redeemer Lives": "Inspired by Job 19:25–27",
+  "He Will Wipe the Tears Away": "Inspired by Revelation 21:1–4",
+  "Morning Mercies": "Inspired by Lamentations 3:22–24",
+
+  // Volume III — Original Songs
+  "From Hands and Time and Home": "For honoring the daily, faithful presence of a life given generously",
+  "What Love Leaves Behind": "For the truth that love keeps working long after a person is gone",
+  "Tears and Laughter Too": "For the services where grief and gratitude live side by side",
+  "Love Learned a New Way to Stay": "For the quiet after — learning that love changes form but does not end",
+  "We Find You in the Little Things": "For finding the person you lost in the small, ordinary places they lived",
+  "What You Planted Keeps Growing": "For the legacy of character, faith, and example that outlasts a life",
+  "When We Say Your Name": "For the service itself — the moment the room gathers around a single name",
+  "The Kindness Stayed": "For honoring the quiet, faithful kindness that shaped every room it touched",
+  "You Still Show Us How": "For the ongoing teaching of a life — the example that keeps instructing",
+  "We Will Carry This Love": "For the commitment to carry forward what was given — a farewell that becomes a promise",
+
+  // Volume IV — Celebration of Life
+  "What a Run You Had": "For a full life remembered with gratitude and admiration",
+  "Every Room You Entered": "For the person who lit up the room by simply being there",
+  "Thank You for the Ride": "For a life remembered through roads, miles, and shared adventure",
+  "We'll Tell the Good Stories First": "For services where stories and laughter are part of the tribute",
+  "The Table Stayed Full Around You": "For the person whose love gathered people in",
+  "You Lived It Out Loud": "For the person who was fully and unmistakably themselves",
+  "We Can Cry and Still Be Thankful": "For families who want joy and sorrow held together honestly",
+  "You Made the Day Feel Larger": "For the person whose spirit made other people feel more alive",
+  "Because of You, We'll Live Braver": "For gratitude that leads the living forward",
+  "Go Well, Go Glad": "For a warm and grateful closing farewell",
+
+  // Volume V — Veterans & Service Tribute
+  "More Than the Uniform": "The person behind the uniform",
+  "The Watch Is Ended": "Duty completed, at rest",
+  "You Ran Toward It": "First responder courage",
+  "Day Is Done": "The graveside moment — Taps reframed",
+  "The Last Post": "The final roll call answered",
+  "Brothers and Sisters in Arms": "The brotherhood and sisterhood bond",
+  "Served in Silence": "Quiet, unrecognized service",
+  "What You Gave We Cannot Repay": "Gratitude for sacrifice",
+  "The Fields You Kept": "What was protected by their service",
+  "Rest Now, Soldier": "The final release",
+
+  // Volume VI — Child & Infant Loss
+  "We Held You in the Morning": "The physical shock of loss",
+  "The Shortest Story": "The completeness of a brief life",
+  "Heaven Knows Your Name": "The fear of being forgotten",
+  "A Life We Barely Started": "The unlived milestones",
+  "Soft as a Prayer": "The sacred act of final parting",
+  "The Space You Left Is Shaped Like You": "The domestic aftermath",
+  "Even Now the Love Remains": "The unbreakable cord",
+  "You Were Here": "The child speaking back",
+  "We Will Learn to Breathe Again": "The mechanics of survival",
+  "Too Small for Words": "The invisible grief of early loss",
+  "Guard This Grief": "The witness voice — testimony across time",
+
+  // Volume VII — Spouse & Partner Loss
+  "The Morning Did Not Know": "Shock of the first morning alone",
+  "By Afternoon, the House Grows Heavy": "The daily heaviness of grief",
+  "You Are Still in This House": "Feeling them still in the house",
+  "I Am Learning How to Carry This": "Learning to carry the loss",
+  "When Evening Finds Me Here": "Facing the evenings alone",
+  "This Life Has Changed Its Shape": "Living inside changed routines",
+  "What Your Love Still Teaches Me": "Remembering what their love taught",
+  "Where Love Is Still Remembered": "Remembering with gentle hope",
+  "Love Still Knows the Way": "Love that still reaches them",
+  "The Road Still Opens Before Me": "Taking the next step forward",
+
+  // Volume VIII — Parent & Grandparent Tribute
+  "The House You Made a Home": "The warmth they built around the family",
+  "Your Hands Are Still in This Life": "The work and care they left behind",
+  "The Voice I Still Hear": "The guidance I still carry from you",
+  "First Teacher, Lasting Love": "What you taught me is still shaping my life",
+  "What Grandma Knew": "The warmth and wisdom she carried into family",
+  "The Strength Behind Us": "The one whose strength held the family up",
+  "You Won't See This Day, But You're Here": "The love we still feel in the milestones to come",
+  "The Stories at Your Knee": "The stories and family memory you handed down",
+  "Everything Good I Learned from You": "The goodness I carry forward from your life",
+  "Still the Place I Turn": "The parent who still feels like home to my heart",
+
+  // Volume IX — Sudden Loss
+  "The First Few Days": "For the strange calm before the grief arrives — when you're still going through the motions",
+  "We Didn't Get to Say Goodbye": "For the words that were never spoken and the ordinary morning that became the last one",
+  "The Day That Didn't Wait": "For the moment life changed without warning — and the world that kept moving anyway",
+  "Too Soon": "For mourning both the person and the future you were supposed to have together",
+  "I Don't Know How to Do This Yet": "For the fog of early grief — when the simplest things feel like starting over",
+  "The Space Between the Knowing and the Feeling": "For the days when you know they're gone but can't feel it yet",
+  "Where Do We Put the Anger": "For the grief that burns — when love has nowhere left to go",
+  "Still Here, Still Broken": "For the ones who are functioning on the outside and carrying everything on the inside",
+  "Not Yet Ready for the Light": "For anyone who needs permission to stay in the dark a little longer",
+  "Somehow We Will Find the Morning": "For the moment you're ready to believe — not that it gets better, but that you'll carry it forward",
+  "Even in the Dark, Love Stays": "For the truth that loss cannot take — that love is woven into everything that remains",
+
+  // Volume X — Hope, Heaven & Reunion
+  "I Will Know Your Face Again": "The promise that I will see and know you again",
+  "Waiting on the Other Shore": "A gentle picture of heaven as crossing and arrival",
+  "Heaven Has Another Name Now": "Heaven feels nearer because you are there",
+  "The Long Hello": "The reunion where goodbye gives way to greeting",
+  "Every Tear Returned as Joy": "The reunion where grief is answered and every tear is kept",
+  "Where Goodbyes Have No Meaning": "The plain promise that goodbye is not the last word",
+  "The Welcome Home": "The homecoming where the loved one is received in peace",
+  "We Will Find Each Other There": "The promise of reunion across the whole family",
+  "Not Goodbye — Not Ever": "The simplest promise that love is not ended by death",
+  "The Morning That Never Ends": "The eternal day where grief gives way to peace"
+};
+
+/* =========================================================
+   VOLUME DATA — Q3 options built so every song in every
+   volume is reachable as a primary or alternate.
+   ========================================================= */
+
+const VOLUMES = {
+  I: {
+    numeral: "Volume I", title: "Poems & Readings",
+    allSongs: ["Love Still Leads Us On","You Are in the Morning","Just Beyond This Room","When You Remember Me","Beyond the Horizon","Safe Across the Water","Carry the Light","The Roads You Gave Us","All the Love Remains","Do Not Stand in Sorrow"],
+    options: [
+      { label: "The love that continues beyond grief", song: "Love Still Leads Us On", alts: ["All the Love Remains","The Roads You Gave Us"] },
+      { label: "We find them in the world around us now", song: "You Are in the Morning", alts: ["Just Beyond This Room","Beyond the Horizon"] },
+      { label: "Permission to remember with both tears and gratitude", song: "When You Remember Me", alts: ["Do Not Stand in Sorrow","All the Love Remains"] },
+      { label: "A peaceful, dignified farewell", song: "Safe Across the Water", alts: ["Beyond the Horizon","Carry the Light"] },
+      { label: "Their courage, and the legacy they leave us", song: "Carry the Light", alts: ["The Roads You Gave Us","Do Not Stand in Sorrow"] }
+    ]
+  },
+  II: {
+    numeral: "Volume II", title: "Scripture",
+    allSongs: ["Shepherd Through the Valley","A Place Prepared","Still Held in Love","The Life That Cannot Die","When the Trumpet Sounds","We Will Always Be with the Lord","For Every Season","My Redeemer Lives","He Will Wipe the Tears Away","Morning Mercies"],
+    options: [
+      { label: "God walking with us through this valley", song: "Shepherd Through the Valley", alts: ["Morning Mercies","Still Held in Love"] },
+      { label: "The place prepared for them", song: "A Place Prepared", alts: ["We Will Always Be with the Lord","The Life That Cannot Die"] },
+      { label: "Resurrection hope — the grave is not the end", song: "When the Trumpet Sounds", alts: ["My Redeemer Lives","The Life That Cannot Die"] },
+      { label: "Nothing can separate us from God's love", song: "Still Held in Love", alts: ["Morning Mercies","My Redeemer Lives"] },
+      { label: "A season for everything — even this", song: "For Every Season", alts: ["He Will Wipe the Tears Away","We Will Always Be with the Lord"] }
+    ]
+  },
+  III: {
+    numeral: "Volume III", title: "Original Songs",
+    allSongs: ["From Hands and Time and Home","What Love Leaves Behind","Tears and Laughter Too","Love Learned a New Way to Stay","We Find You in the Little Things","What You Planted Keeps Growing","When We Say Your Name","The Kindness Stayed","You Still Show Us How","We Will Carry This Love"],
+    options: [
+      { label: "Their everyday kindness shaped everything", song: "The Kindness Stayed", alts: ["From Hands and Time and Home","We Find You in the Little Things"] },
+      { label: "We find them in the little things now", song: "We Find You in the Little Things", alts: ["What Love Leaves Behind","Love Learned a New Way to Stay"] },
+      { label: "We want to laugh and cry together", song: "Tears and Laughter Too", alts: ["When We Say Your Name","We Will Carry This Love"] },
+      { label: "Their example still teaches us how to live", song: "You Still Show Us How", alts: ["What You Planted Keeps Growing","From Hands and Time and Home"] },
+      { label: "Love changed its form, but it didn't end", song: "Love Learned a New Way to Stay", alts: ["What Love Leaves Behind","We Will Carry This Love"] }
+    ]
+  },
+  IV: {
+    numeral: "Volume IV", title: "Celebration of Life",
+    allSongs: ["What a Run You Had","Every Room You Entered","Thank You for the Ride","We'll Tell the Good Stories First","The Table Stayed Full Around You","You Lived It Out Loud","We Can Cry and Still Be Thankful","You Made the Day Feel Larger","Because of You, We'll Live Braver","Go Well, Go Glad"],
+    options: [
+      { label: "What a full life they lived", song: "What a Run You Had", alts: ["Thank You for the Ride","You Lived It Out Loud"] },
+      { label: "They lit up every room they entered", song: "Every Room You Entered", alts: ["You Made the Day Feel Larger","The Table Stayed Full Around You"] },
+      { label: "The stories — we want to laugh together", song: "We'll Tell the Good Stories First", alts: ["We Can Cry and Still Be Thankful","Thank You for the Ride"] },
+      { label: "Joy and sorrow, held together honestly", song: "We Can Cry and Still Be Thankful", alts: ["Go Well, Go Glad","We'll Tell the Good Stories First"] },
+      { label: "Their spirit pushes us to live braver", song: "Because of You, We'll Live Braver", alts: ["You Lived It Out Loud","Go Well, Go Glad"] }
+    ]
+  },
+  V: {
+    numeral: "Volume V", title: "Veterans & Service Tribute",
+    allSongs: ["More Than the Uniform","The Watch Is Ended","You Ran Toward It","Day Is Done","The Last Post","Brothers and Sisters in Arms","Served in Silence","What You Gave We Cannot Repay","The Fields You Kept","Rest Now, Soldier"],
+    options: [
+      { label: "The person behind the uniform", song: "More Than the Uniform", alts: ["Brothers and Sisters in Arms","What You Gave We Cannot Repay"] },
+      { label: "The ceremony — the graveside, the folded flag", song: "Day Is Done", alts: ["The Last Post","The Watch Is Ended"] },
+      { label: "Their courage — they ran toward it", song: "You Ran Toward It", alts: ["The Fields You Kept","More Than the Uniform"] },
+      { label: "Their quiet service, never asking to be seen", song: "Served in Silence", alts: ["What You Gave We Cannot Repay","The Fields You Kept"] },
+      { label: "Release — the watch is over now", song: "Rest Now, Soldier", alts: ["The Watch Is Ended","The Last Post"] }
+    ]
+  },
+  VI: {
+    numeral: "Volume VI", title: "Child & Infant Loss",
+    allSongs: ["We Held You in the Morning","The Shortest Story","Heaven Knows Your Name","A Life We Barely Started","Soft as a Prayer","The Space You Left Is Shaped Like You","Even Now the Love Remains","You Were Here","We Will Learn to Breathe Again","Too Small for Words","Guard This Grief"],
+    options: [
+      { label: "We're still in shock", song: "We Held You in the Morning", alts: ["The Shortest Story","Too Small for Words"] },
+      { label: "We're afraid they'll be forgotten", song: "Heaven Knows Your Name", alts: ["You Were Here","A Life We Barely Started"] },
+      { label: "We grieve the life they didn't get to live", song: "A Life We Barely Started", alts: ["The Shortest Story","Soft as a Prayer"] },
+      { label: "Their absence fills our home", song: "The Space You Left Is Shaped Like You", alts: ["Even Now the Love Remains","We Will Learn to Breathe Again"] },
+      { label: "We need someone to walk with us in this", song: "Guard This Grief", alts: ["Too Small for Words","Soft as a Prayer"] }
+    ]
+  },
+  VII: {
+    numeral: "Volume VII", title: "Spouse & Partner Loss",
+    allSongs: ["The Morning Did Not Know","By Afternoon, the House Grows Heavy","You Are Still in This House","I Am Learning How to Carry This","When Evening Finds Me Here","This Life Has Changed Its Shape","What Your Love Still Teaches Me","Where Love Is Still Remembered","Love Still Knows the Way","The Road Still Opens Before Me"],
+    options: [
+      { label: "It's the first days — nothing feels real yet", song: "The Morning Did Not Know", alts: ["By Afternoon, the House Grows Heavy","You Are Still in This House"] },
+      { label: "Every day still feels heavy", song: "By Afternoon, the House Grows Heavy", alts: ["When Evening Finds Me Here","This Life Has Changed Its Shape"] },
+      { label: "I still feel them here, in this house", song: "You Are Still in This House", alts: ["Where Love Is Still Remembered","Love Still Knows the Way"] },
+      { label: "What their love taught me still guides me", song: "What Your Love Still Teaches Me", alts: ["Love Still Knows the Way","Where Love Is Still Remembered"] },
+      { label: "I'm learning to carry this, and to step forward", song: "I Am Learning How to Carry This", alts: ["The Road Still Opens Before Me","This Life Has Changed Its Shape"] }
+    ]
+  },
+  VIII: {
+    numeral: "Volume VIII", title: "Parent & Grandparent Tribute",
+    allSongs: ["The House You Made a Home","Your Hands Are Still in This Life","The Voice I Still Hear","First Teacher, Lasting Love","What Grandma Knew","The Strength Behind Us","You Won't See This Day, But You're Here","The Stories at Your Knee","Everything Good I Learned from You","Still the Place I Turn"],
+    options: [
+      { label: "The home and warmth they built", song: "The House You Made a Home", alts: ["What Grandma Knew","Still the Place I Turn"] },
+      { label: "Their hands, their work, their quiet care", song: "Your Hands Are Still in This Life", alts: ["The Strength Behind Us","The House You Made a Home"] },
+      { label: "Their voice and guidance I still carry", song: "The Voice I Still Hear", alts: ["First Teacher, Lasting Love","Everything Good I Learned from You"] },
+      { label: "The stories and family memory they handed down", song: "The Stories at Your Knee", alts: ["What Grandma Knew","Everything Good I Learned from You"] },
+      { label: "The milestones they'll miss — and the love that stays", song: "You Won't See This Day, But You're Here", alts: ["Still the Place I Turn","The Strength Behind Us"] }
+    ]
+  },
+  IX: {
+    numeral: "Volume IX", title: "Sudden Loss",
+    allSongs: ["The First Few Days","We Didn't Get to Say Goodbye","The Day That Didn't Wait","Too Soon","I Don't Know How to Do This Yet","The Space Between the Knowing and the Feeling","Where Do We Put the Anger","Still Here, Still Broken","Not Yet Ready for the Light","Somehow We Will Find the Morning","Even in the Dark, Love Stays"],
+    options: [
+      { label: "We're still going through the motions, numb", song: "The First Few Days", alts: ["The Space Between the Knowing and the Feeling","I Don't Know How to Do This Yet"] },
+      { label: "We never got to say goodbye", song: "We Didn't Get to Say Goodbye", alts: ["The Day That Didn't Wait","Too Soon"] },
+      { label: "We're angry, and no one will let us say it", song: "Where Do We Put the Anger", alts: ["Not Yet Ready for the Light","Still Here, Still Broken"] },
+      { label: "We're functioning outside, breaking inside", song: "Still Here, Still Broken", alts: ["I Don't Know How to Do This Yet","Not Yet Ready for the Light"] },
+      { label: "We're starting to believe we'll carry this forward", song: "Somehow We Will Find the Morning", alts: ["Even in the Dark, Love Stays","Too Soon"] }
+    ]
+  },
+  X: {
+    numeral: "Volume X", title: "Hope, Heaven & Reunion",
+    allSongs: ["I Will Know Your Face Again","Waiting on the Other Shore","Heaven Has Another Name Now","The Long Hello","Every Tear Returned as Joy","Where Goodbyes Have No Meaning","The Welcome Home","We Will Find Each Other There","Not Goodbye — Not Ever","The Morning That Never Ends"],
+    options: [
+      { label: "I will see and know their face again", song: "I Will Know Your Face Again", alts: ["The Long Hello","Not Goodbye — Not Ever"] },
+      { label: "A peaceful crossing to the other shore", song: "Waiting on the Other Shore", alts: ["The Welcome Home","The Morning That Never Ends"] },
+      { label: "Heaven feels nearer because they're there", song: "Heaven Has Another Name Now", alts: ["Waiting on the Other Shore","The Long Hello"] },
+      { label: "Our whole family, gathered again", song: "We Will Find Each Other There", alts: ["Every Tear Returned as Joy","Where Goodbyes Have No Meaning"] },
+      { label: "Goodbye is not the last word", song: "Not Goodbye — Not Ever", alts: ["Where Goodbyes Have No Meaning","The Welcome Home"] }
+    ]
+  }
+};
+
+/* =========================================================
+   QUESTIONS & ROUTING
+   ========================================================= */
+
+const Q1_OPTIONS = [
+  { value: "spouse", label: "A spouse or partner" },
+  { value: "parent", label: "A parent or grandparent" },
+  { value: "child",  label: "A child" },
+  { value: "served", label: "Someone who served — military or first responder" },
+  { value: "other",  label: "Someone else dear to us" }
+];
+
+const Q2_OPTIONS = [
+  { value: "sudden",    label: "Sit with us in the shock — it happened without warning" },
+  { value: "celebrate", label: "Celebrate a life that was fully lived" },
+  { value: "scripture", label: "Speak our faith and the scriptures we hold" },
+  { value: "hope",      label: "Hold the promise that we will see them again" },
+  { value: "true",      label: "Just tell the truth about losing them" }
+];
+
+const REL_VOLUME = { spouse: "VII", parent: "VIII", served: "V", child: "VI", other: null };
+
+// Returns { primary, secondary } volume keys. Secondary may be null.
+function resolveVolumes(q1, q2){
+  const rel = REL_VOLUME[q1];
+
+  // Child path: skips Q2 entirely. Primary VI, secondary X.
+  if (q1 === "child") return { primary: "VI", secondary: "X" };
+
+  if (q2 === "sudden")    return { primary: "IX", secondary: rel || "III" };
+  if (q2 === "celebrate") return { primary: "IV", secondary: rel || "III" };
+  if (q2 === "scripture") return { primary: "II", secondary: rel || "X" };
+  if (q2 === "hope")      return { primary: "X",  secondary: rel || "II" };
+  // q2 === "true": route by relationship; "other" gets III with I as the backup
+  if (rel) return { primary: rel, secondary: null };
+  return { primary: "III", secondary: "I" };
+}
+
+/* =========================================================
+   STATE & NAVIGATION
+   ========================================================= */
+
+let state = {
+  history: ["intro"],
+  q1: null, q2: null,
+  primary: null, secondary: null,
+  q3choice: null
+};
+let beatTimer = null;
+
+function currentScreen(){ return state.history[state.history.length - 1]; }
+
+function go(screen){ state.history.push(screen); render(); }
+
+function back(){
+  if (beatTimer){ clearTimeout(beatTimer); beatTimer = null; }
+  if (state.history.length > 1){
+    // never land back on the transient beat screen
+    do { state.history.pop(); }
+    while (currentScreen() === "beat" && state.history.length > 1);
+    const prev = currentScreen();
+    if (prev === "intro"){ state.q1 = null; state.q2 = null; state.primary = null; state.secondary = null; state.q3choice = null; }
+    if (prev === "q1"){ state.q2 = null; state.primary = null; state.secondary = null; state.q3choice = null; }
+    if (prev === "q2" || prev === "q3"){ state.q3choice = null; }
+    render();
+  }
+}
+
+function restart(){
+  if (beatTimer){ clearTimeout(beatTimer); beatTimer = null; }
+  state = { history: ["intro"], q1: null, q2: null, primary: null, secondary: null, q3choice: null };
+  render();
+}
+
+function selectQ1(value){
+  state.q1 = value;
+  if (value === "child"){
+    const r = resolveVolumes(value, null);
+    state.primary = r.primary; state.secondary = r.secondary;
+    go("q3");
+  } else {
+    go("q2");
+  }
+}
+
+function selectQ2(value){
+  state.q2 = value;
+  const r = resolveVolumes(state.q1, value);
+  state.primary = r.primary; state.secondary = r.secondary;
+  go("q3");
+}
+
+function selectQ3(index){
+  state.q3choice = index;
+  go("beat");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  beatTimer = setTimeout(() => {
+    beatTimer = null;
+    // replace beat with result so Back never returns to the beat
+    state.history.pop();
+    go("result");
+  }, reduced ? 500 : 1400);
+}
+
+function browseVolume(){ go("browse"); }
+
+/* =========================================================
+   RENDER HELPERS
+   ========================================================= */
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+function flourish(){
+  return '<div class="flourish"><span class="line"></span><span class="mark">&#10022;</span><span class="line"></span></div>';
+}
+
+function navRow(showBack){
+  return `<div class="nav-row">
+    <button class="nav-link ${showBack ? "" : "invisible"}" onclick="back()">&#8592; Back</button>
+    <button class="nav-link ${state.history.length > 1 ? "" : "invisible"}" onclick="restart()">Start over</button>
+  </div>`;
+}
+
+function progressDots(activeIndex){
+  const total = (state.q1 === "child") ? 2 : 3;
+  let dots = "";
+  for (let i = 0; i < total; i++){
+    dots += `<span class="dot ${i === activeIndex ? "active" : ""}"></span>`;
+  }
+  return `<div class="progress">${dots}</div>`;
+}
+
+function songCard(title, labelText, cls){
+  return `<div class="song-card ${cls}">
+    <div class="label">${labelText}</div>
+    <div class="name">${esc(title)}</div>
+    <div class="sub">${esc(SONGS[title] || "")}</div>
+  </div>`;
+}
+
+function secondaryNote(){
+  if (!state.secondary) return "";
+  const sec = VOLUMES[state.secondary];
+  return `<div class="secondary-note">
+    If nothing here says what you need said, <b>${sec.numeral} — ${esc(sec.title)}</b> may also hold what you're looking for.
+  </div>`;
+}
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+  const app = document.getElementById("app");
+  const screen = currentScreen();
+
+  if (screen === "intro"){
+    app.innerHTML = `
+      <div class="fade-in">
+        <div class="eyebrow">Even in the Night, Love Remains</div>
+        ${flourish()}
+        <h1 class="title">Find Your Way to a Song</h1>
+        <p class="lede">A few gentle questions to help narrow the collection.<br>Take your time. There's no hurry here.</p>
+        <button class="start-btn" onclick="go('q1')">Begin</button>
+      </div>`;
+    return;
+  }
+
+  if (screen === "q1"){
+    app.innerHTML = `
+      <div class="fade-in">
+        ${navRow(true)}
+        ${progressDots(0)}
+        <div class="question">Who are we honoring today?</div>
+        <div class="options">
+          ${Q1_OPTIONS.map(o => `<button class="option" onclick="selectQ1('${o.value}')">${esc(o.label)}</button>`).join("")}
+        </div>
+      </div>`;
+    return;
+  }
+
+  if (screen === "q2"){
+    app.innerHTML = `
+      <div class="fade-in">
+        ${navRow(true)}
+        ${progressDots(1)}
+        <div class="question">What do you most need the song to do?</div>
+        <div class="options">
+          ${Q2_OPTIONS.map(o => `<button class="option" onclick="selectQ2('${o.value}')">${esc(o.label)}</button>`).join("")}
+        </div>
+      </div>`;
+    return;
+  }
+
+  if (screen === "q3"){
+    const vol = VOLUMES[state.primary];
+    const stepIndex = (state.q1 === "child") ? 1 : 2;
+    app.innerHTML = `
+      <div class="fade-in">
+        ${navRow(true)}
+        ${progressDots(stepIndex)}
+        <div class="question">Which feels closest to where you are?</div>
+        <div class="options">
+          ${vol.options.map((o, i) => `<button class="option" onclick="selectQ3(${i})">${esc(o.label)}</button>`).join("")}
+          <button class="option quiet" onclick="browseVolume()">None of these quite fit — show me all the songs in this volume</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  if (screen === "beat"){
+    app.innerHTML = `
+      <div class="fade-in">
+        <div class="beat">Thank you.<br>Here is where we would start.</div>
+      </div>`;
+    return;
+  }
+
+  if (screen === "result"){
+    const vol = VOLUMES[state.primary];
+    const choice = vol.options[state.q3choice];
+    app.innerHTML = `
+      <div class="fade-in">
+        ${navRow(true)}
+        <div class="result-numeral">${vol.numeral}</div>
+        <div class="result-title">${esc(vol.title)}</div>
+        <div class="result-instruction">Open to this volume in the book.<br>Here are a few songs to look for:</div>
+        <div class="songs">
+          ${songCard(choice.song, "Start here", "primary")}
+          ${choice.alts.map(a => songCard(a, "You might also look at", "alt")).join("")}
+        </div>
+        ${secondaryNote()}
+        <div class="closing-line">You don't need to choose quickly.<br>Read each one until something says what you need said today.</div>
+        <div class="restart-row">
+          <button class="ghost-btn" onclick="browseVolume()">See all songs in this volume</button>
+          <button class="ghost-btn" onclick="restart()">Start over</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  if (screen === "browse"){
+    const vol = VOLUMES[state.primary];
+    app.innerHTML = `
+      <div class="fade-in">
+        ${navRow(true)}
+        <div class="result-numeral">${vol.numeral}</div>
+        <div class="result-title">${esc(vol.title)}</div>
+        <div class="result-instruction">Every song in this volume. Read slowly — one of these may already know your name.</div>
+        <div class="browse-list">
+          ${vol.allSongs.map(t => `
+            <div class="browse-item">
+              <div class="name">${esc(t)}</div>
+              <div class="sub">${esc(SONGS[t] || "")}</div>
+            </div>`).join("")}
+        </div>
+        ${secondaryNote()}
+        <div class="restart-row">
+          <button class="ghost-btn" onclick="restart()">Start over</button>
+        </div>
+      </div>`;
+    return;
+  }
+}
+
+render();
+</script>
+</body>
+</html>
