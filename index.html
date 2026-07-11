@@ -5,6 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MemoVivo — Every life deserves a song.</title>
 <meta name="description" content="MemoVivo creates original personalized songs from the memories families share — delivered through funeral homes, hospice providers, and assisted living communities.">
+<link rel="canonical" href="https://memovivo.co/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://memovivo.co/">
+<meta property="og:site_name" content="MemoVivo">
+<meta property="og:title" content="MemoVivo — Every life deserves a song.">
+<meta property="og:description" content="Original personalized songs built from the memories families share — delivered through funeral homes, hospice providers, and assisted living communities.">
+<meta property="og:image" content="https://memovivo.co/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MemoVivo — Every life deserves a song.">
+<meta name="twitter:description" content="Original personalized songs built from the memories families share.">
+<meta name="twitter:image" content="https://memovivo.co/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "MemoVivo LLC",
+  "url": "https://memovivo.co",
+  "email": "duane@memovivo.co",
+  "founder": { "@type": "Person", "name": "Duane Fernandez" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Cochran", "addressRegion": "GA", "addressCountry": "US" },
+  "description": "Original personalized tribute songs built from a family's own memories, delivered through funeral home, hospice, and assisted living partners.",
+  "areaServed": "Georgia"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -40,6 +69,11 @@ nav.scrolled { background: rgba(38,50,56,0.92); backdrop-filter: blur(12px); -we
 .nav-links a:hover { color: var(--amber-light); }
 .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-light) !important; border: 1px solid rgba(217,168,92,.4); padding: 8px 18px; border-radius: 2px; transition: background .2s, color .2s !important; }
 .nav-cta:hover { background: rgba(217,168,92,.12) !important; }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 101; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: rgba(250,250,247,.85); margin: 5px 0; border-radius: 1px; transition: transform .25s ease, opacity .25s ease; }
+nav.open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+nav.open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .hero { background: var(--slate-deep); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 40px 80px; position: relative; overflow: hidden; text-align: center; }
 .hero::after { content: ''; position: absolute; bottom: -20%; left: 50%; transform: translateX(-50%); width: 80%; height: 60%; background: radial-gradient(ellipse, rgba(192,139,58,0.11) 0%, transparent 65%); pointer-events: none; }
 .hero-eyebrow { font-size: 10px; font-weight: 400; letter-spacing: .28em; text-transform: uppercase; color: var(--amber-light); opacity: .65; margin-bottom: 48px; position: relative; z-index: 1; }
@@ -155,15 +189,34 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
 .footer-copy { font-size: 10px; font-weight: 300; letter-spacing: .12em; color: rgba(250,250,247,.2); }
 @media (max-width: 768px) {
   nav { padding: 16px 24px; }
-  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; padding: 84px 24px 32px; background: rgba(38,50,56,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); flex-direction: column; align-items: flex-start; gap: 24px; }
+  nav.open .nav-links { display: flex; }
+  .nav-links a { font-size: 13px; }
+  .nav-links .nav-cta { margin-top: 8px; }
   .hero { padding: 100px 24px 70px; }
   .hero-mark svg { width: 260px; }
   .what-inner, .partner-inner { grid-template-columns: 1fr; gap: 48px; }
   .subbrand { grid-template-columns: 1fr; }
   .sb-panel { padding: 60px 32px; }
+  .founder-inner { grid-template-columns: 1fr; gap: 40px; }
+  .founder-photo { max-width: 260px; }
   .footer-links { display: none; }
   footer { padding: 40px 24px; }
 }
+.founder { background: var(--cream); padding: 100px 40px; position: relative; }
+.founder-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 72px; align-items: center; }
+.founder-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 3px; box-shadow: 0 20px 50px rgba(28,28,26,.15); }
+.founder-kicker { font-size: 9px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--amber); margin-bottom: 20px; }
+.founder h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(30px,3.5vw,42px); color: var(--ink); line-height: 1.2; letter-spacing: .02em; margin-bottom: 24px; }
+.founder h2 em { font-style: italic; color: var(--amber); }
+.founder p { font-size: 14.5px; font-weight: 300; line-height: 1.85; color: var(--ink-mid); margin-bottom: 16px; }
+.founder p em { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16.5px; color: var(--ink); }
+.founder-sig { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--ink); margin-top: 24px; }
+.founder-sig span { display: block; font-family: 'Jost', sans-serif; font-style: normal; font-size: 10px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); margin-top: 5px; }
+.endorse { border-left: 2px solid var(--sage); margin: 30px 0 4px; padding: 4px 0 4px 22px; }
+.endorse p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; line-height: 1.5; color: var(--ink); margin-bottom: 10px; }
+.endorse cite { font-style: normal; font-size: 10px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -177,7 +230,10 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
     </svg>
     <span class="nav-name">Memo<em>Vivo</em></span>
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#what">What We Do</a></li>
     <li><a href="#sample">Hear a Song</a></li>
     <li><a href="#waitlist">Stay in Touch</a></li>
@@ -301,12 +357,26 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
     <p class="waitlist-body">MemoVivo is available now. Leave your email to receive stories from families we've served, updates on new offerings, and news from the MemoVivo community.</p>
     <div id="waitlistForm">
       <div class="form-row">
-        <input type="email" id="waitlistEmail" placeholder="your@email.com" autocomplete="email"/>
+        <input type="email" id="waitlistEmail" placeholder="your@email.com" autocomplete="email" aria-label="Your email address"/>
         <button onclick="submitWaitlist()">Stay Updated</button>
       </div>
       <p class="form-note">No spam. Just songs, stories, and updates worth reading.</p>
     </div>
     <div class="form-success" id="waitlistSuccess">Thank you — we'll be in touch soon.</div>
+  </div>
+</section>
+
+<section class="founder" id="founder">
+  <div class="founder-inner">
+    <img class="founder-photo reveal" src="/duane.jpg" alt="Duane Fernandez, founder of MemoVivo" onerror="this.style.display='none'">
+    <div class="reveal">
+      <div class="founder-kicker">From the Founder</div>
+      <h2>The songs began <em>in a circle of chairs.</em></h2>
+      <p>My name is Duane Fernandez. I live in Cochran, Georgia, and I've spent more than forty years leading church music — and served as a certified funeral celebrant through more than seventy memorial services.</p>
+      <p>Before every service, I gathered the family in a circle and asked about the person they loved. Not interview questions — just openings. Stories came out. People laughed. People cried. One man wrote to me afterward: <em>"You listened to our stories, and we know that you heard them because you shared them."</em></p>
+      <p>MemoVivo grew out of those circles. Every song is built the same way — from the stories, the sayings, and the small ordinary things only a family would know.</p>
+      <div class="founder-sig">Duane Fernandez<span>Founder, MemoVivo · Cochran, Georgia</span></div>
+    </div>
   </div>
 </section>
 
@@ -316,24 +386,29 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
       <div class="section-kicker">For Funeral Homes & Partners</div>
       <h2>Offer your families something they'll <em>never forget.</em></h2>
       <p>MemoVivo works directly with funeral homes, hospice providers, and assisted living communities as a white-label partner service.</p>
-      <p>You present it. We deliver it. Your families receive an original personalized song within 2 days — under your name, with your care.</p>
+      <p>You present it. We deliver it. Your families receive an original personalized song within 24 hours — under your name, with your care.</p>
       <ul class="partner-bullets">
         <li>No additional staff training required</li>
         <li>Delivered in your name with your branding</li>
         <li>Simple intake process — families complete in minutes</li>
         <li>24-hour turnaround, guaranteed</li>
         <li>Sample song available to play during arrangement conversations</li>
+        <li>If the family isn't moved by what they hear, there's no charge — we stand behind every song</li>
       </ul>
+      <blockquote class="endorse">
+        <p>"This is one of the most impactful gifts I have seen in my almost fifty years of funeral service."</p>
+        <cite>Bruce Goddard · Licensed Funeral Director (Retired)</cite>
+      </blockquote>
     </div>
     <div class="partner-right reveal">
       <div class="contact-form">
         <h3>Let's talk about a partnership.</h3>
         <div id="contactForm">
-          <div class="field"><label>Your Name</label><input type="text" id="contactName" placeholder="Jane Smith"/></div>
-          <div class="field"><label>Organization</label><input type="text" id="contactOrg" placeholder="Smith Family Funeral Home"/></div>
-          <div class="field"><label>Email</label><input type="email" id="contactEmail" placeholder="jane@smithfuneralhome.com"/></div>
+          <div class="field"><label for="contactName">Your Name</label><input type="text" id="contactName" placeholder="Jane Smith" autocomplete="name"/></div>
+          <div class="field"><label for="contactOrg">Organization</label><input type="text" id="contactOrg" placeholder="Smith Family Funeral Home" autocomplete="organization"/></div>
+          <div class="field"><label for="contactEmail">Email</label><input type="email" id="contactEmail" placeholder="jane@smithfuneralhome.com" autocomplete="email"/></div>
           <div class="field">
-            <label>Type of Organization</label>
+            <label for="contactType">Type of Organization</label>
             <select id="contactType">
               <option value="">Select one…</option>
               <option>Funeral Home</option>
@@ -342,7 +417,7 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
               <option>Other</option>
             </select>
           </div>
-          <div class="field"><label>Message (optional)</label><textarea id="contactMessage" placeholder="Tell us a little about your organization or what you're looking for…"></textarea></div>
+          <div class="field"><label for="contactMessage">Message (optional)</label><textarea id="contactMessage" placeholder="Tell us a little about your organization or what you're looking for…"></textarea></div>
           <button class="btn-sage" onclick="submitContact()">Send My Information</button>
         </div>
         <div class="contact-success" id="contactSuccess">Thank you. Duane will be in touch within one business day.</div>
@@ -368,6 +443,16 @@ footer { background: var(--ink); padding: 52px 40px; display: flex; align-items:
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+function toggleNav() {
+  const open = nav.classList.toggle('open');
+  const btn = document.getElementById('navToggle');
+  btn.setAttribute('aria-expanded', open);
+  btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => { if (nav.classList.contains('open')) toggleNav(); });
+});
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
@@ -441,9 +526,16 @@ function submitWaitlist() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email, form: 'waitlist' })
-  }).then(() => {
+  }).then((r) => {
     document.getElementById('waitlistForm').style.display = 'none';
-    document.getElementById('waitlistSuccess').style.display = 'block';
+    const s = document.getElementById('waitlistSuccess');
+    if (!r.ok) s.textContent = "Something didn't go through — please email duane@memovivo.co and we'll add you.";
+    s.style.display = 'block';
+  }).catch(() => {
+    document.getElementById('waitlistForm').style.display = 'none';
+    const s = document.getElementById('waitlistSuccess');
+    s.textContent = "Something didn't go through — please email duane@memovivo.co and we'll add you.";
+    s.style.display = 'block';
   });
 }
 
@@ -458,9 +550,16 @@ function submitContact() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, org, email, type, message, form: 'partner-inquiry' })
-  }).then(() => {
+  }).then((r) => {
     document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('contactSuccess').style.display = 'block';
+    const s = document.getElementById('contactSuccess');
+    if (!r.ok) s.textContent = "Something didn't go through — please email duane@memovivo.co directly.";
+    s.style.display = 'block';
+  }).catch(() => {
+    document.getElementById('contactForm').style.display = 'none';
+    const s = document.getElementById('contactSuccess');
+    s.textContent = "Something didn't go through — please email duane@memovivo.co directly.";
+    s.style.display = 'block';
   });
 }
 </script>
