@@ -570,11 +570,13 @@
 <div class="page-wrap">
 
   <header class="site-header">
+    <a href="https://memovivo.co" aria-label="MemoVivo home">
     <svg class="wave-mark" width="200" height="28" viewBox="0 0 340 70" fill="none">
       <circle cx="14" cy="35" r="3.5" fill="#C9A84C" opacity="0.7"/>
       <path d="M18 35 C24 35,27 22,32 14 C37 6,41 6,44 14 C47 22,49 46,53 54 C57 62,61 62,64 54 C67 46,68 20,73 11 C78 2,83 2,87 11 C91 20,93 50,98 58 C103 66,107 64,111 56 C115 48,116 26,121 19 C126 12,130 13,133 20 C136 27,137 46,141 52 C145 58,148 57,151 51 C154 45,155 32,159 27 C163 22,166 23,168 28 C170 33,171 42,174 46 C177 50,179 49,181 45 C183 41,184 34,186 31 C188 28,190 29,191 32 C192 35,192 39,194 41 C196 43,197 42,198 40" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.65"/>
       <line x1="200" y1="40" x2="310" y2="40" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.22"/>
     </svg>
+    </a>
 
     <p class="brand-label">MemoVivo &nbsp;·&nbsp; Legacy Song</p>
 
@@ -608,6 +610,7 @@
         <div class="field-group">
           <label class="field-label" for="funeral-home">Funeral Home <span class="req">*</span></label>
           <input type="text" id="funeral-home" name="Funeral Home" placeholder="Name of funeral home" required>
+          <span class="field-note">Not working with a funeral home? Just write "none."</span>
         </div>
       </div>
 
@@ -621,7 +624,7 @@
       <div class="two-col">
         <div class="field-group">
           <label class="field-label" for="your-name">Your Name <span class="req">*</span></label>
-          <input type="text" id="your-name" name="Your Name" placeholder="Your full name" required>
+          <input type="text" id="your-name" name="Your Name" placeholder="Your full name" autocomplete="name" required>
         </div>
         <div class="field-group">
           <label class="field-label" for="relationship">Your Relationship <span class="req">*</span></label>
@@ -632,11 +635,11 @@
       <div class="two-col">
         <div class="field-group">
           <label class="field-label" for="your-email">Your Email <span class="req">*</span></label>
-          <input type="email" id="your-email" name="Your Email" placeholder="your@email.com" required>
+          <input type="email" id="your-email" name="Your Email" placeholder="your@email.com" autocomplete="email" required>
         </div>
         <div class="field-group">
           <label class="field-label" for="your-phone">Phone Number</label>
-          <input type="tel" id="your-phone" name="Phone Number" placeholder="Optional">
+          <input type="tel" id="your-phone" name="Phone Number" placeholder="Optional" autocomplete="tel">
           <span class="field-note">Only used if we need to clarify something before we begin.</span>
         </div>
       </div>
@@ -716,8 +719,7 @@
           <span class="question-text">Because of them, what is different about your life?</span>
         </div>
         <p class="question-guide">What did they leave inside you? There is no wrong answer here.</p>
-        <p class="question-guide">What I will always remember about them is …</p>
-        <textarea name="Q8 Because of them what is different in your life" rows="4" placeholder="There is no wrong answer here…"></textarea>
+        <textarea name="Q8 Because of them what is different in your life" rows="4" placeholder="What I will always remember about them is …"></textarea>
       </div>
 
       <!-- Voice memo alternative -->
@@ -756,6 +758,7 @@
           Your responses go directly and securely to our songwriter.<br>
           The song will be delivered within 24 hours of submission.
         </p>
+        <p id="form-notice" style="display:none; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--amber-deep); margin-bottom:18px; line-height:1.7;"></p>
         <button type="submit" class="submit-btn" id="submit-btn">Send My Memories</button>
         <p class="contact-line">
           Questions? Reach us at <a href="mailto:duane@memovivo.co">duane@memovivo.co</a>
@@ -772,7 +775,7 @@
       <p>
         Your memories have been received. Our songwriter will begin
         crafting <span id="confirm-name">their</span> song right away.
-        It will be delivered within 24 hours.
+        We'll send it to the email you shared, within 24 hours.
       </p>
     </div>
 
@@ -794,9 +797,47 @@
   const confirmation = document.getElementById('confirmation');
   const submitBtn = document.getElementById('submit-btn');
   const confirmName = document.getElementById('confirm-name');
+  const notice = document.getElementById('form-notice');
+
+  function showNotice(msg) {
+    notice.textContent = msg;
+    notice.style.display = 'block';
+    notice.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Screen-reader names for the eight memory boxes
+  document.querySelectorAll('.question-block').forEach(function(b) {
+    const q = b.querySelector('.question-text');
+    const t = b.querySelector('textarea');
+    if (q && t) t.setAttribute('aria-label', q.textContent);
+  });
+
+  // Autosave draft locally so nothing is ever lost
+  const SAVE_KEY = 'memovivo-legacy-draft';
+  const savable = Array.from(form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea'));
+  try {
+    const draft = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}');
+    savable.forEach(function(f) { if (f.name && draft[f.name]) f.value = draft[f.name]; });
+  } catch (e) {}
+  let saveTimer;
+  form.addEventListener('input', function() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function() {
+      const draft = {};
+      savable.forEach(function(f) { if (f.name && f.value) draft[f.name] = f.value; });
+      try { localStorage.setItem(SAVE_KEY, JSON.stringify(draft)); } catch (e) {}
+    }, 800);
+  });
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    notice.style.display = 'none';
+
+    const anyMemory = Array.from(form.querySelectorAll('.question-block textarea')).some(function(t) { return t.value.trim(); });
+    if (!anyMemory) {
+      showNotice('Would you like to share at least one memory first? Even a line or two becomes the heart of the song.');
+      return;
+    }
 
     const lovedOneName = document.getElementById('loved-one-name').value.trim();
     if (lovedOneName) confirmName.textContent = lovedOneName + "'s";
@@ -841,18 +882,19 @@
       const result = await response.json();
 
       if (result.success) {
+        try { localStorage.removeItem(SAVE_KEY); } catch (e) {}
         form.style.display = 'none';
         confirmation.classList.add('visible');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send My Memories';
-        alert('Something went wrong. Please try again or contact us at duane@memovivo.co.');
+        showNotice("Something didn't go through — your words are saved right here. Please try again, or email us at duane@memovivo.co.");
       }
     } catch (err) {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send My Memories';
-      alert('Something went wrong. Please try again or contact us at duane@memovivo.co.');
+      showNotice("Something didn't go through — your words are saved right here. Please try again, or email us at duane@memovivo.co.");
     }
   });
 </script>
